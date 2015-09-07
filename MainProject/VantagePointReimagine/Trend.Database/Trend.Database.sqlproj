@@ -59,7 +59,4 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
-  <ItemGroup>
-    <Build Include="T_User.sql" />
-  </ItemGroup>
 </Project>
