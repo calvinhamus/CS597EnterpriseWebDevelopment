@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[T_Plc]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Type] VARCHAR(50) NOT NULL, 
+    [Name] VARCHAR(50) NOT NULL, 
+    [IpAddress] VARCHAR(15) NOT NULL
+)
