@@ -1,0 +1,6 @@
+Project Checkpoints:
+
+Oct 8- Admin portal created and fully functional, this will allow basic data to be entered into the database.  Initial research on use of SignalR complete.
+Oct 22- OAuth authentication implemented and working.  Dummy PLC system created and dumping to database.  
+Nov 12- Charts fully functional along with the saving of the charts.
+Dec 3-Done with all the things!!!  Front end looking pretty and live data being sent to front end along with being dumped to db.

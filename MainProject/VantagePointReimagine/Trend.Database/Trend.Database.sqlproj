@@ -60,5 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="T_User.sql" />
+    <Build Include="T_UserLevel.sql" />
+    <Build Include="T_Plc.sql" />
+    <Build Include="T_UserPlc.sql" />
+    <Build Include="T_DataPoint.sql" />
+    <Build Include="T_DataValue.sql" />
+    <Build Include="T_SavedChart.sql" />
+    <Build Include="T_ChartData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Trend.Database.refactorlog" />
   </ItemGroup>
 </Project>
