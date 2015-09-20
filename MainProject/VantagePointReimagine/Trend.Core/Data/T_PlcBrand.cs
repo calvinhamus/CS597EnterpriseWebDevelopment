@@ -6,29 +6,21 @@ namespace Trend.Core.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class T_SavedChart
+    public partial class T_PlcBrand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_SavedChart()
+        public T_PlcBrand()
         {
-            T_ChartData = new HashSet<T_ChartData>();
+            T_Plc = new HashSet<T_Plc>();
         }
 
         public int Id { get; set; }
-
-        public int T_UserId { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
-        public DateTime Created { get; set; }
-
-        public DateTime Updated { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_ChartData> T_ChartData { get; set; }
-
-        public virtual T_User T_User { get; set; }
+        public virtual ICollection<T_Plc> T_Plc { get; set; }
     }
 }

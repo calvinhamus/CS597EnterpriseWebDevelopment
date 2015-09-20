@@ -8,6 +8,3 @@ E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\Ent
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.csprojResolveAssemblyReference.cache
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.dll
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.pdb
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.Migrations.Initial.resources
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.csproj.GenerateResource.Cache
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.Migrations.emailfield.resources

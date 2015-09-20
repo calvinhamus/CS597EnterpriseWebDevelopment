@@ -39,7 +39,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_DataPoint/Create
         public ActionResult Create()
         {
-            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Type");
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Type", t_DataPoint.T_PlcId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_DataPoint.T_PlcId);
             return View(t_DataPoint);
         }
 
@@ -73,7 +73,7 @@ namespace Trend.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Type", t_DataPoint.T_PlcId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_DataPoint.T_PlcId);
             return View(t_DataPoint);
         }
 
@@ -90,7 +90,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Type", t_DataPoint.T_PlcId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_DataPoint.T_PlcId);
             return View(t_DataPoint);
         }
 

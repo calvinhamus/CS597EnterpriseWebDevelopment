@@ -57,35 +57,20 @@
     <Compile Include="Data\T_DataPoint.cs" />
     <Compile Include="Data\T_DataValue.cs" />
     <Compile Include="Data\T_Plc.cs" />
+    <Compile Include="Data\T_PlcBrand.cs" />
     <Compile Include="Data\T_SavedChart.cs" />
     <Compile Include="Data\T_User.cs" />
     <Compile Include="Data\T_UserLevel.cs" />
     <Compile Include="Data\T_UserPlc.cs" />
-    <Compile Include="Migrations\201509201918159_Initial.cs" />
-    <Compile Include="Migrations\201509201918159_Initial.Designer.cs">
-      <DependentUpon>201509201918159_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509201919596_email field.cs" />
-    <Compile Include="Migrations\201509201919596_email field.Designer.cs">
-      <DependentUpon>201509201919596_email field.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Services\DataAccess\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509201918159_Initial.resx">
-      <DependentUpon>201509201918159_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509201919596_email field.resx">
-      <DependentUpon>201509201919596_email field.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
