@@ -1,0 +1,10 @@
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\Trend.Core.dll.config
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\Trend.Core.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\Trend.Core.pdb
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\EntityFramework.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\EntityFramework.xml
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.csprojResolveAssemblyReference.cache
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Core\obj\Debug\Trend.Core.pdb

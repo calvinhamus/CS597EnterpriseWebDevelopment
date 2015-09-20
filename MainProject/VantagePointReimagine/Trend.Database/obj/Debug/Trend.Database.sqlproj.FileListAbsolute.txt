@@ -1,0 +1,9 @@
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\bin\Debug\Trend.Database.dacpac
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\bin\Debug\Trend.Database.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\bin\Debug\Trend.Database.pdb
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\Model.xml
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\refactor.xml
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\postdeploy.sql
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\predeploy.sql
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\Trend.Database.dll
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Database\obj\Debug\Trend.Database.pdb
