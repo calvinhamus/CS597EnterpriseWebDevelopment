@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -13,14 +13,17 @@
 <table class="table">
     <tr>
         <th>
-           Level
+            @Html.DisplayNameFor(model => model.T_UserLevel1.Name)
         </th>
         <th>
-           Username
+            @Html.DisplayNameFor(model => model.username)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.password)
-        </th>*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
         <th></th>
     </tr>
 
@@ -32,9 +35,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.username)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.password)
-        </td>*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

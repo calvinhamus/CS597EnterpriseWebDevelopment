@@ -248,11 +248,6 @@
     <Content Include="Areas\Admin\Views\T_SavedChart\Details.cshtml" />
     <Content Include="Areas\Admin\Views\T_SavedChart\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\T_SavedChart\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\T_UserLevel\Create.cshtml" />
     <Content Include="Areas\Admin\Views\T_UserLevel\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\T_UserLevel\Details.cshtml" />
@@ -268,6 +263,11 @@
     <Content Include="Areas\Admin\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\T_User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\T_User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\T_User\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\T_User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\T_User\Index.cshtml" />
     <None Include="Properties\PublishProfiles\DataTrend.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />

@@ -48,7 +48,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,username,password,T_UserLevel")] T_User t_User)
+        public ActionResult Create([Bind(Include = "Id,username,password,email,T_UserLevel,ConfirmPassword")] T_User t_User)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,username,password,T_UserLevel")] T_User t_User)
+        public ActionResult Edit([Bind(Include = "Id,username,password,email,T_UserLevel")] T_User t_User)
         {
             if (ModelState.IsValid)
             {

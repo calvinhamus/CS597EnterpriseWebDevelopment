@@ -4,5 +4,6 @@
     [username] VARCHAR(20) NOT NULL, 
     [password] VARCHAR(50) NOT NULL, 
     [T_UserLevel] INT NOT NULL, 
+    [email] VARCHAR(50) NOT NULL, 
     CONSTRAINT [FK_T_User_T_UserLevel] FOREIGN KEY (T_UserLevel) REFERENCES [T_UserLevel]([Id])
 )

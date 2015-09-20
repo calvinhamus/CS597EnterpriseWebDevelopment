@@ -19,12 +19,27 @@ namespace Trend.Core.Data
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "User Name")]
         public string username { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string password { get; set; }
 
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Level")]
         public int T_UserLevel { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

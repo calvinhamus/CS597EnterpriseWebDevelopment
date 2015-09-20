@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -12,8 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @*@Html.DisplayNameFor(model => model.T_UserLevel1.Name)*@
-            Level
+            @Html.DisplayNameFor(model => model.T_UserLevel1.Name)
         </dt>
 
         <dd>
@@ -21,21 +20,28 @@
         </dd>
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.username)*@
-            Username
+            @Html.DisplayNameFor(model => model.username)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.username)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.password)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.password)
-        </dd>*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
 
     </dl>
 </div>
