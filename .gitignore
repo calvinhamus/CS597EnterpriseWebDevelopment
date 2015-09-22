@@ -41,3 +41,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/MainProject/VantagePointReimagine/Trend.Web/bin
+/MainProject/VantagePointReimagine/Trend.Web/obj/Debug
+/MainProject/VantagePointReimagine/Trend.Database/obj/Debug
+/MainProject/VantagePointReimagine/Trend.Database/bin/Debug
+/MainProject/VantagePointReimagine/Trend.Core/obj/Debug
+/MainProject/VantagePointReimagine/Trend.Core/bin/Debug

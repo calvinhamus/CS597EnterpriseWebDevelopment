@@ -362,7 +362,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57238</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Trend</IISUrl>
+          <IISUrl>https://localhost/Trend</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost/Trend</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
