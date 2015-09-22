@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[T_SavedChart]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     [T_UserId] INT NOT NULL, 
     [Name] VARCHAR(50) NOT NULL, 
     [Created] DATETIME NOT NULL, 

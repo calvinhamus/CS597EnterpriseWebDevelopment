@@ -17,7 +17,8 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_Plc
         public ActionResult Index()
         {
-            return View(db.T_Plc.ToList());
+            var t_Plc = db.T_Plc.Include(t => t.T_PlcBrand);
+            return View(t_Plc.ToList());
         }
 
         // GET: Admin/T_Plc/Details/5
@@ -38,6 +39,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_Plc/Create
         public ActionResult Create()
         {
+            ViewBag.T_PlcBrandId = new SelectList(db.T_PlcBrand, "Id", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Type,Name,IpAddress")] T_Plc t_Plc)
+        public ActionResult Create([Bind(Include = "Id,Name,IpAddress,T_PlcBrandId")] T_Plc t_Plc)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.T_PlcBrandId = new SelectList(db.T_PlcBrand, "Id", "Name", t_Plc.T_PlcBrandId);
             return View(t_Plc);
         }
 
@@ -70,6 +73,7 @@ namespace Trend.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.T_PlcBrandId = new SelectList(db.T_PlcBrand, "Id", "Name", t_Plc.T_PlcBrandId);
             return View(t_Plc);
         }
 
@@ -78,7 +82,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Name,IpAddress")] T_Plc t_Plc)
+        public ActionResult Edit([Bind(Include = "Id,Name,IpAddress,T_PlcBrandId")] T_Plc t_Plc)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.T_PlcBrandId = new SelectList(db.T_PlcBrand, "Id", "Name", t_Plc.T_PlcBrandId);
             return View(t_Plc);
         }
 

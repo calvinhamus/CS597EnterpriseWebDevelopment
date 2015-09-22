@@ -14,7 +14,6 @@ namespace Trend.Core.Data
             T_ChartData = new HashSet<T_ChartData>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int T_DataPoint { get; set; }

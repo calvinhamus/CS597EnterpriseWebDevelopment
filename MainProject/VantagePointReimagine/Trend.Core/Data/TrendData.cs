@@ -16,6 +16,7 @@ namespace Trend.Core.Data
         public virtual DbSet<T_DataPoint> T_DataPoint { get; set; }
         public virtual DbSet<T_DataValue> T_DataValue { get; set; }
         public virtual DbSet<T_Plc> T_Plc { get; set; }
+        public virtual DbSet<T_PlcBrand> T_PlcBrand { get; set; }
         public virtual DbSet<T_SavedChart> T_SavedChart { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_UserLevel> T_UserLevel { get; set; }
@@ -39,10 +40,6 @@ namespace Trend.Core.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<T_Plc>()
-                .Property(e => e.Type)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<T_Plc>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
@@ -60,6 +57,15 @@ namespace Trend.Core.Data
                 .WithRequired(e => e.T_Plc)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<T_PlcBrand>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<T_PlcBrand>()
+                .HasMany(e => e.T_Plc)
+                .WithRequired(e => e.T_PlcBrand)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<T_SavedChart>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -70,11 +76,15 @@ namespace Trend.Core.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<T_User>()
-                .Property(e => e.username)
+                .Property(e => e.Username)
                 .IsUnicode(false);
 
             modelBuilder.Entity<T_User>()
-                .Property(e => e.password)
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<T_User>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<T_User>()

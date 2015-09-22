@@ -8,7 +8,6 @@ namespace Trend.Core.Data
 
     public partial class T_ChartData
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int T_SavedChartId { get; set; }

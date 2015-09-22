@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[T_DataValue]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     [T_DataPoint] INT NOT NULL, 
     [Value] DECIMAL(18, 2) NOT NULL, 
     [DateTime] DATETIME NOT NULL, 

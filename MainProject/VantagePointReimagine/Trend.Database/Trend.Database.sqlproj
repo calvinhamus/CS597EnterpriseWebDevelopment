@@ -67,8 +67,12 @@
     <Build Include="T_DataValue.sql" />
     <Build Include="T_SavedChart.sql" />
     <Build Include="T_ChartData.sql" />
+    <Build Include="T_PlcBrand.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Trend.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Trend.Database.publish.xml" />
   </ItemGroup>
 </Project>

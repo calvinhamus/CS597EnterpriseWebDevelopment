@@ -14,7 +14,6 @@ namespace Trend.Core.Data
             T_DataValue = new HashSet<T_DataValue>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]

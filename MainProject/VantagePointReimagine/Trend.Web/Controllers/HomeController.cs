@@ -26,5 +26,11 @@ namespace Trend.Web.Controllers
 
             return View();
         }
+        public ActionResult StockTicker()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

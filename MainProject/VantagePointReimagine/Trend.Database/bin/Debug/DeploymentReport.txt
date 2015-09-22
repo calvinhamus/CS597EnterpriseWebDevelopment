@@ -1,0 +1,30 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[T_ChartData] (Table)
+       [dbo].[T_DataPoint] (Table)
+       [dbo].[T_DataValue] (Table)
+       [dbo].[T_Plc] (Table)
+       [dbo].[T_SavedChart] (Table)
+       [dbo].[T_User] (Table)
+       [dbo].[T_UserLevel] (Table)
+       [dbo].[T_UserPlc] (Table)
+       [dbo].[FK_T_ChartData_T_SavedChart] (Foreign Key)
+       [dbo].[FK_T_ChartData_T_DataValue] (Foreign Key)
+       [dbo].[FK_T_DataPoint_T_Plc] (Foreign Key)
+       [dbo].[FK_T_DataValue_T_DataPoint] (Foreign Key)
+       [dbo].[FK_T_SavedChart_T_User] (Foreign Key)
+       [dbo].[FK_T_User_T_UserLevel] (Foreign Key)
+       [dbo].[FK_T_UserPlc_T_UserId] (Foreign Key)
+       [dbo].[FK_T_UserPlc_T_T_plc] (Foreign Key)
+
+** Supporting actions
