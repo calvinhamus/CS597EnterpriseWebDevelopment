@@ -16,7 +16,9 @@ namespace Trend.Core.Data
 
         public int Id { get; set; }
 
-        public int T_UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string T_UserId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -26,9 +28,9 @@ namespace Trend.Core.Data
 
         public DateTime Updated { get; set; }
 
+        public virtual AspNetUser AspNetUser { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_ChartData> T_ChartData { get; set; }
-
-        public virtual T_User T_User { get; set; }
     }
 }

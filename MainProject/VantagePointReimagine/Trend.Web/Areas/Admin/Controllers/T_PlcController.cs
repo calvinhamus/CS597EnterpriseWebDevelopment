@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Trend.Core.Data;
+using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_PlcController : Controller
+    public class T_PlcController : BaseAdminController
     {
         private TrendData db = new TrendData();
 

@@ -10,112 +10,107 @@ using Trend.Core.Data;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_UserController : Controller
+    public class AspNetRolesController : Controller
     {
         private TrendData db = new TrendData();
 
-        // GET: Admin/T_User
+        // GET: Admin/AspNetRoles
         public ActionResult Index()
         {
-            var t_User = db.T_User.Include(t => t.T_UserLevel1);
-            return View(t_User.ToList());
+            return View(db.AspNetRoles.ToList());
         }
 
-        // GET: Admin/T_User/Details/5
-        public ActionResult Details(int? id)
+        // GET: Admin/AspNetRoles/Details/5
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_User t_User = db.T_User.Find(id);
-            if (t_User == null)
+            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+            if (aspNetRole == null)
             {
                 return HttpNotFound();
             }
-            return View(t_User);
+            return View(aspNetRole);
         }
 
-        // GET: Admin/T_User/Create
+        // GET: Admin/AspNetRoles/Create
         public ActionResult Create()
         {
-            ViewBag.T_UserLevel = new SelectList(db.T_UserLevel, "Id", "Name");
             return View();
         }
 
-        // POST: Admin/T_User/Create
+        // POST: Admin/AspNetRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Password,T_UserLevel,Email, ConfirmPassword")] T_User t_User)
+        public ActionResult Create([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
         {
             if (ModelState.IsValid)
             {
-                db.T_User.Add(t_User);
+                db.AspNetRoles.Add(aspNetRole);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_UserLevel = new SelectList(db.T_UserLevel, "Id", "Name", t_User.T_UserLevel);
-            return View(t_User);
+            return View(aspNetRole);
         }
 
-        // GET: Admin/T_User/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Admin/AspNetRoles/Edit/5
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_User t_User = db.T_User.Find(id);
-            if (t_User == null)
+            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+            if (aspNetRole == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.T_UserLevel = new SelectList(db.T_UserLevel, "Id", "Name", t_User.T_UserLevel);
-            return View(t_User);
+            return View(aspNetRole);
         }
 
-        // POST: Admin/T_User/Edit/5
+        // POST: Admin/AspNetRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Password,T_UserLevel,Email")] T_User t_User)
+        public ActionResult Edit([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_User).State = EntityState.Modified;
+                db.Entry(aspNetRole).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_UserLevel = new SelectList(db.T_UserLevel, "Id", "Name", t_User.T_UserLevel);
-            return View(t_User);
+            return View(aspNetRole);
         }
 
-        // GET: Admin/T_User/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Admin/AspNetRoles/Delete/5
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_User t_User = db.T_User.Find(id);
-            if (t_User == null)
+            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+            if (aspNetRole == null)
             {
                 return HttpNotFound();
             }
-            return View(t_User);
+            return View(aspNetRole);
         }
 
-        // POST: Admin/T_User/Delete/5
+        // POST: Admin/AspNetRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            T_User t_User = db.T_User.Find(id);
-            db.T_User.Remove(t_User);
+            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
+            db.AspNetRoles.Remove(aspNetRole);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

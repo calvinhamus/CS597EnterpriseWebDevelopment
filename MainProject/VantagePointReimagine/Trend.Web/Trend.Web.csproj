@@ -188,6 +188,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AspNetUserRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_ChartDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_DataPointController.cs" />
@@ -195,15 +198,19 @@
     <Compile Include="Areas\Admin\Controllers\T_PlcBrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_PlcController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_SavedChartController.cs" />
-    <Compile Include="Areas\Admin\Controllers\T_UserController.cs" />
-    <Compile Include="Areas\Admin\Controllers\T_UserLevelController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_UserPlcController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseAuthenticatedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509272216456_Init.cs" />
+    <Compile Include="Migrations\201509272216456_Init.Designer.cs">
+      <DependentUpon>201509272216456_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -240,31 +247,11 @@
     <Content Include="Areas\Admin\Views\T_DataValue\Details.cshtml" />
     <Content Include="Areas\Admin\Views\T_DataValue\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\T_DataValue\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\T_SavedChart\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\T_SavedChart\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\T_SavedChart\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\T_SavedChart\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\T_SavedChart\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserLevel\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserLevel\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserLevel\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserLevel\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserLevel\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\T_User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\T_PlcBrand\Create.cshtml" />
     <Content Include="Areas\Admin\Views\T_PlcBrand\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\T_PlcBrand\Details.cshtml" />
     <Content Include="Areas\Admin\Views\T_PlcBrand\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\T_PlcBrand\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserPlc\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserPlc\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserPlc\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserPlc\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\T_UserPlc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\T_Plc\Create.cshtml" />
     <Content Include="Areas\Admin\Views\T_Plc\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\T_Plc\Details.cshtml" />
@@ -275,6 +262,26 @@
     <Content Include="Areas\Admin\Views\T_DataPoint\Details.cshtml" />
     <Content Include="Areas\Admin\Views\T_DataPoint\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\T_DataPoint\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\T_SavedChart\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\T_SavedChart\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\T_SavedChart\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\T_SavedChart\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\T_SavedChart\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\T_UserPlc\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\T_UserPlc\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\T_UserPlc\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\T_UserPlc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\T_UserPlc\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUserRoles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUserRoles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUserRoles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUserRoles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUserRoles\Index.cshtml" />
     <None Include="Properties\PublishProfiles\DataTrend.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
@@ -338,7 +345,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\BaseAdmin\" />
     <Folder Include="Controllers\WebAPIControllers\" />
+    <Folder Include="Views\BaseAuthenticated\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -353,6 +362,11 @@
       <Project>{1a4194f8-d397-4867-8b2f-3a92026f5d0b}</Project>
       <Name>Trend.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509272216456_Init.resx">
+      <DependentUpon>201509272216456_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -372,7 +386,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57238</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Trend</IISUrl>
+          <IISUrl>https://localhost/Trend</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>https://localhost/Trend</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Data\AspNetRole.cs" />
+    <Compile Include="Data\AspNetUser.cs" />
+    <Compile Include="Data\AspNetUserClaim.cs" />
+    <Compile Include="Data\AspNetUserLogin.cs" />
+    <Compile Include="Data\AspNetUserRole.cs" />
     <Compile Include="Data\TrendData.cs" />
     <Compile Include="Data\T_ChartData.cs" />
     <Compile Include="Data\T_DataPoint.cs" />
@@ -59,8 +64,6 @@
     <Compile Include="Data\T_Plc.cs" />
     <Compile Include="Data\T_PlcBrand.cs" />
     <Compile Include="Data\T_SavedChart.cs" />
-    <Compile Include="Data\T_User.cs" />
-    <Compile Include="Data\T_UserLevel.cs" />
     <Compile Include="Data\T_UserPlc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

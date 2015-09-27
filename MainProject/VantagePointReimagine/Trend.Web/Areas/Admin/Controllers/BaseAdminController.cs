@@ -7,12 +7,10 @@ using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class HomeController : BaseAdminController
+    [Authorize(Roles ="Admin")]
+    public class BaseAdminController : BaseAuthenticatedController
     {
-        // GET: Admin/Home
-        public ActionResult Index()
-        {
-            return View();
-        }
+        // GET: Admin/BaseAdmin
+       
     }
 }

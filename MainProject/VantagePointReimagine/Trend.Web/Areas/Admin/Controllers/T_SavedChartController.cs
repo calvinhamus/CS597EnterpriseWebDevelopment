@@ -17,7 +17,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_SavedChart
         public ActionResult Index()
         {
-            var t_SavedChart = db.T_SavedChart.Include(t => t.T_User);
+            var t_SavedChart = db.T_SavedChart.Include(t => t.AspNetUser);
             return View(t_SavedChart.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_SavedChart/Create
         public ActionResult Create()
         {
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "username");
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "username", t_SavedChart.T_UserId);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
             return View(t_SavedChart);
         }
 
@@ -73,7 +73,7 @@ namespace Trend.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "username", t_SavedChart.T_UserId);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
             return View(t_SavedChart);
         }
 
@@ -90,7 +90,7 @@ namespace Trend.Web.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "username", t_SavedChart.T_UserId);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
             return View(t_SavedChart);
         }
 

@@ -10,107 +10,116 @@ using Trend.Core.Data;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_UserLevelController : Controller
+    public class AspNetUserRolesController : Controller
     {
         private TrendData db = new TrendData();
 
-        // GET: Admin/T_UserLevel
+        // GET: Admin/AspNetUserRoles
         public ActionResult Index()
         {
-            return View(db.T_UserLevel.ToList());
+            var aspNetUserRoles = db.AspNetUserRoles.Include(a => a.AspNetRole).Include(a => a.AspNetUser);
+            return View(aspNetUserRoles.ToList());
         }
 
-        // GET: Admin/T_UserLevel/Details/5
+        // GET: Admin/AspNetUserRoles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_UserLevel t_UserLevel = db.T_UserLevel.Find(id);
-            if (t_UserLevel == null)
+            AspNetUserRole aspNetUserRole = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRole == null)
             {
                 return HttpNotFound();
             }
-            return View(t_UserLevel);
+            return View(aspNetUserRole);
         }
 
-        // GET: Admin/T_UserLevel/Create
+        // GET: Admin/AspNetUserRoles/Create
         public ActionResult Create()
         {
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: Admin/T_UserLevel/Create
+        // POST: Admin/AspNetUserRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] T_UserLevel t_UserLevel)
+        public ActionResult Create([Bind(Include = "Id,UserId,RoleId")] AspNetUserRole aspNetUserRole)
         {
             if (ModelState.IsValid)
             {
-                db.T_UserLevel.Add(t_UserLevel);
+                db.AspNetUserRoles.Add(aspNetUserRole);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(t_UserLevel);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRole.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRole.UserId);
+            return View(aspNetUserRole);
         }
 
-        // GET: Admin/T_UserLevel/Edit/5
+        // GET: Admin/AspNetUserRoles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_UserLevel t_UserLevel = db.T_UserLevel.Find(id);
-            if (t_UserLevel == null)
+            AspNetUserRole aspNetUserRole = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRole == null)
             {
                 return HttpNotFound();
             }
-            return View(t_UserLevel);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRole.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRole.UserId);
+            return View(aspNetUserRole);
         }
 
-        // POST: Admin/T_UserLevel/Edit/5
+        // POST: Admin/AspNetUserRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] T_UserLevel t_UserLevel)
+        public ActionResult Edit([Bind(Include = "Id,UserId,RoleId")] AspNetUserRole aspNetUserRole)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_UserLevel).State = EntityState.Modified;
+                db.Entry(aspNetUserRole).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(t_UserLevel);
+            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name", aspNetUserRole.RoleId);
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", aspNetUserRole.UserId);
+            return View(aspNetUserRole);
         }
 
-        // GET: Admin/T_UserLevel/Delete/5
+        // GET: Admin/AspNetUserRoles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_UserLevel t_UserLevel = db.T_UserLevel.Find(id);
-            if (t_UserLevel == null)
+            AspNetUserRole aspNetUserRole = db.AspNetUserRoles.Find(id);
+            if (aspNetUserRole == null)
             {
                 return HttpNotFound();
             }
-            return View(t_UserLevel);
+            return View(aspNetUserRole);
         }
 
-        // POST: Admin/T_UserLevel/Delete/5
+        // POST: Admin/AspNetUserRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            T_UserLevel t_UserLevel = db.T_UserLevel.Find(id);
-            db.T_UserLevel.Remove(t_UserLevel);
+            AspNetUserRole aspNetUserRole = db.AspNetUserRoles.Find(id);
+            db.AspNetUserRoles.Remove(aspNetUserRole);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

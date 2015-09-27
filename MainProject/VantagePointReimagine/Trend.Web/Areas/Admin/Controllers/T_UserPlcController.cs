@@ -17,7 +17,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_UserPlc
         public ActionResult Index()
         {
-            var t_UserPlc = db.T_UserPlc.Include(t => t.T_Plc).Include(t => t.T_User);
+            var t_UserPlc = db.T_UserPlc.Include(t => t.AspNetUser).Include(t => t.T_Plc);
             return View(t_UserPlc.ToList());
         }
 
@@ -39,8 +39,8 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_UserPlc/Create
         public ActionResult Create()
         {
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name");
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "Username");
             return View();
         }
 
@@ -58,8 +58,8 @@ namespace Trend.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
             ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "Username", t_UserPlc.T_UserId);
             return View(t_UserPlc);
         }
 
@@ -75,8 +75,8 @@ namespace Trend.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
             ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "Username", t_UserPlc.T_UserId);
             return View(t_UserPlc);
         }
 
@@ -93,8 +93,8 @@ namespace Trend.Web.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
             ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
-            ViewBag.T_UserId = new SelectList(db.T_User, "Id", "Username", t_UserPlc.T_UserId);
             return View(t_UserPlc);
         }
 

@@ -12,18 +12,53 @@ namespace Trend.Core.Data
         {
         }
 
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<T_ChartData> T_ChartData { get; set; }
         public virtual DbSet<T_DataPoint> T_DataPoint { get; set; }
         public virtual DbSet<T_DataValue> T_DataValue { get; set; }
         public virtual DbSet<T_Plc> T_Plc { get; set; }
         public virtual DbSet<T_PlcBrand> T_PlcBrand { get; set; }
         public virtual DbSet<T_SavedChart> T_SavedChart { get; set; }
-        public virtual DbSet<T_User> T_User { get; set; }
-        public virtual DbSet<T_UserLevel> T_UserLevel { get; set; }
         public virtual DbSet<T_UserPlc> T_UserPlc { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetRole>()
+                .HasMany(e => e.AspNetUserRoles)
+                .WithRequired(e => e.AspNetRole)
+                .HasForeignKey(e => e.RoleId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserClaims)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserLogins)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserRoles)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.T_SavedChart)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.T_UserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.T_UserPlc)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.T_UserId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<T_DataPoint>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -73,38 +108,6 @@ namespace Trend.Core.Data
             modelBuilder.Entity<T_SavedChart>()
                 .HasMany(e => e.T_ChartData)
                 .WithRequired(e => e.T_SavedChart)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<T_User>()
-                .Property(e => e.Username)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<T_User>()
-                .Property(e => e.Password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<T_User>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<T_User>()
-                .HasMany(e => e.T_SavedChart)
-                .WithRequired(e => e.T_User)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<T_User>()
-                .HasMany(e => e.T_UserPlc)
-                .WithRequired(e => e.T_User)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<T_UserLevel>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<T_UserLevel>()
-                .HasMany(e => e.T_User)
-                .WithRequired(e => e.T_UserLevel1)
-                .HasForeignKey(e => e.T_UserLevel)
                 .WillCascadeOnDelete(false);
         }
     }
