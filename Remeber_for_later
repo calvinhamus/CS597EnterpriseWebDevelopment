@@ -1,0 +1,10 @@
+Remember::
+
+ var builder = new ContainerBuilder();
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterAssemblyTypes(Assembly.Load("Core")).Where(t => t.Name.EndsWith("Service")).
+                WithParameter(new NamedParameter("connectionString", connectionString)).AsImplementedInterfaces().InstancePerHttpRequest();
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
