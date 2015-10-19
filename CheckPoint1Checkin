@@ -1,0 +1,3 @@
+I was completely successful in creating the admin portion of the application and have gotten a basic realtime socket netowrk in place.  
+The only problem has been finding hosting for the application itself, finding a hosting company that will host .NET and not charge
+a large sum of money for SSL security has been a problem.  I will be looking into AWS this next sprint and hopefully have a solution soon.
