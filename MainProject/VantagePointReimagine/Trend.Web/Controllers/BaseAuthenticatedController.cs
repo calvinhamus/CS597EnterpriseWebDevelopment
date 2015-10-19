@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace Trend.Web.Controllers
 {
     [RequireHttps]
+    [Authorize]
     public class BaseAuthenticatedController : Controller
     {
         // GET: BaseAuthenticated

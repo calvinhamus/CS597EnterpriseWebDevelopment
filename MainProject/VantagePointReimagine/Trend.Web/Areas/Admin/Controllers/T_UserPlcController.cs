@@ -10,7 +10,7 @@ using Trend.Core.Data;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_UserPlcController : Controller
+    public class T_UserPlcController : BaseAdminController
     {
         private TrendData db = new TrendData();
 

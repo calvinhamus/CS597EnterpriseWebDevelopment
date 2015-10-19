@@ -7,6 +7,7 @@ using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles ="Admin")]
     public class BaseAdminController : BaseAuthenticatedController
     {

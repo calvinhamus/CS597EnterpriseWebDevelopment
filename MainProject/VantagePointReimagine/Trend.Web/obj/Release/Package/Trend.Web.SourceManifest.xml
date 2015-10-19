@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\Calvin\Documents\GitHub\CS497EnterpriseWebDevelopment\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\Calvin\Documents\GitHub\CS497EnterpriseWebDevelopment\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\Calvin\Documents\GitHub\CS497EnterpriseWebDevelopment\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" />
+  <setAcl path="E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

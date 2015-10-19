@@ -10,7 +10,7 @@ using Trend.Core.Data;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_SavedChartController : Controller
+    public class T_SavedChartController : BaseAdminController
     {
         private TrendData db = new TrendData();
 

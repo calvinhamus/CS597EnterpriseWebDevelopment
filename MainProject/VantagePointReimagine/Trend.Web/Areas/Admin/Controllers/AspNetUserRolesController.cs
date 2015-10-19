@@ -10,7 +10,7 @@ using Trend.Core.Data;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class AspNetUserRolesController : Controller
+    public class AspNetUserRolesController : BaseAdminController
     {
         private TrendData db = new TrendData();
 

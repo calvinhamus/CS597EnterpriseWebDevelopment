@@ -66,6 +66,7 @@
     <Compile Include="Data\T_SavedChart.cs" />
     <Compile Include="Data\T_UserPlc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DummyPlcService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />

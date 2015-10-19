@@ -79,5 +79,5 @@ E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\bin\Microsoft.
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.csprojResolveAssemblyReference.cache
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.dll
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.pdb
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.Migrations.Init.resources
+E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.Migrations.identity.resources
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Debug\Trend.Web.csproj.GenerateResource.Cache

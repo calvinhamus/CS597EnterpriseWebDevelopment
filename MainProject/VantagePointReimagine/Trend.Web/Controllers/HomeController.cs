@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Trend.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseAuthenticatedController
     {
         public ActionResult Index()
         {

@@ -191,6 +191,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUserRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DummyPlcController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_ChartDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\T_DataPointController.cs" />
@@ -206,9 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509272216456_Init.cs" />
-    <Compile Include="Migrations\201509272216456_Init.Designer.cs">
-      <DependentUpon>201509272216456_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201510190008246_identity.cs" />
+    <Compile Include="Migrations\201510190008246_identity.Designer.cs">
+      <DependentUpon>201510190008246_identity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -282,6 +283,11 @@
     <Content Include="Areas\Admin\Views\AspNetUserRoles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUserRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUserRoles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DummyPlc\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DummyPlc\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DummyPlc\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DummyPlc\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DummyPlc\Index.cshtml" />
     <None Include="Properties\PublishProfiles\DataTrend.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
@@ -364,8 +370,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509272216456_Init.resx">
-      <DependentUpon>201509272216456_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510190008246_identity.resx">
+      <DependentUpon>201510190008246_identity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

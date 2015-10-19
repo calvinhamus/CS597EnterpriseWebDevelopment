@@ -7,13 +7,13 @@ namespace Trend.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class identity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(identity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201509272216456_Init"; }
+            get { return "201510190008246_identity"; }
         }
         
         string IMigrationMetadata.Source

@@ -15,7 +15,7 @@ namespace Trend.Core.Data
             T_UserPlc = new HashSet<T_UserPlc>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+       // [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]

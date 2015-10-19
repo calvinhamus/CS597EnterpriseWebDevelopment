@@ -58,11 +58,11 @@ namespace Trend.Web
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "420144420810-pe7trbgm6fvs2ok5fjs1rmfiknaaotff.apps.googleusercontent.com",
+                ClientSecret = "nh0B3e_S6pELynkW3ABW-VAE"
+            });
         }
     }
 }
