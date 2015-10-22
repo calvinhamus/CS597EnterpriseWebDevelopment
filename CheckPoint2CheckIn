@@ -1,0 +1,3 @@
+Check point two went well.  Oauth is fully implemented for login with Google and hosting hase been established.  
+Most of the boiler plater look and feel of the app are still in place and will be changed next sprint.
+THe dummy PLC is implemented and can be started but is having some trouble being stopped which is an issue with limited DB space.
