@@ -7,116 +7,119 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Trend.Core.Data;
-using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_DataValueController : BaseAdminController
+    public class UserPlcController : BaseAdminController
     {
         private TrendData db = new TrendData();
 
-        // GET: Admin/T_DataValue
+        // GET: Admin/T_UserPlc
         public ActionResult Index()
         {
-            var t_DataValue = db.T_DataValue.Include(t => t.T_DataPoint1);
-            return View(t_DataValue.ToList());
+            var t_UserPlc = db.T_UserPlc.Include(t => t.AspNetUser).Include(t => t.T_Plc);
+            return View(t_UserPlc.ToList());
         }
 
-        // GET: Admin/T_DataValue/Details/5
+        // GET: Admin/T_UserPlc/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_DataValue t_DataValue = db.T_DataValue.Find(id);
-            if (t_DataValue == null)
+            T_UserPlc t_UserPlc = db.T_UserPlc.Find(id);
+            if (t_UserPlc == null)
             {
                 return HttpNotFound();
             }
-            return View(t_DataValue);
+            return View(t_UserPlc);
         }
 
-        // GET: Admin/T_DataValue/Create
+        // GET: Admin/T_UserPlc/Create
         public ActionResult Create()
         {
-            ViewBag.T_DataPoint = new SelectList(db.T_DataPoint, "Id", "Name");
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name");
             return View();
         }
 
-        // POST: Admin/T_DataValue/Create
+        // POST: Admin/T_UserPlc/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,T_DataPoint,Value,DateTime")] T_DataValue t_DataValue)
+        public ActionResult Create([Bind(Include = "Id,T_UserId,T_PlcId")] T_UserPlc t_UserPlc)
         {
             if (ModelState.IsValid)
             {
-                db.T_DataValue.Add(t_DataValue);
+                db.T_UserPlc.Add(t_UserPlc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_DataPoint = new SelectList(db.T_DataPoint, "Id", "Name", t_DataValue.T_DataPoint);
-            return View(t_DataValue);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
+            return View(t_UserPlc);
         }
 
-        // GET: Admin/T_DataValue/Edit/5
+        // GET: Admin/T_UserPlc/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_DataValue t_DataValue = db.T_DataValue.Find(id);
-            if (t_DataValue == null)
+            T_UserPlc t_UserPlc = db.T_UserPlc.Find(id);
+            if (t_UserPlc == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.T_DataPoint = new SelectList(db.T_DataPoint, "Id", "Name", t_DataValue.T_DataPoint);
-            return View(t_DataValue);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
+            return View(t_UserPlc);
         }
 
-        // POST: Admin/T_DataValue/Edit/5
+        // POST: Admin/T_UserPlc/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,T_DataPoint,Value,DateTime")] T_DataValue t_DataValue)
+        public ActionResult Edit([Bind(Include = "Id,T_UserId,T_PlcId")] T_UserPlc t_UserPlc)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_DataValue).State = EntityState.Modified;
+                db.Entry(t_UserPlc).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_DataPoint = new SelectList(db.T_DataPoint, "Id", "Name", t_DataValue.T_DataPoint);
-            return View(t_DataValue);
+            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_UserPlc.T_UserId);
+            ViewBag.T_PlcId = new SelectList(db.T_Plc, "Id", "Name", t_UserPlc.T_PlcId);
+            return View(t_UserPlc);
         }
 
-        // GET: Admin/T_DataValue/Delete/5
+        // GET: Admin/T_UserPlc/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_DataValue t_DataValue = db.T_DataValue.Find(id);
-            if (t_DataValue == null)
+            T_UserPlc t_UserPlc = db.T_UserPlc.Find(id);
+            if (t_UserPlc == null)
             {
                 return HttpNotFound();
             }
-            return View(t_DataValue);
+            return View(t_UserPlc);
         }
 
-        // POST: Admin/T_DataValue/Delete/5
+        // POST: Admin/T_UserPlc/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            T_DataValue t_DataValue = db.T_DataValue.Find(id);
-            db.T_DataValue.Remove(t_DataValue);
+            T_UserPlc t_UserPlc = db.T_UserPlc.Find(id);
+            db.T_UserPlc.Remove(t_UserPlc);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -7,115 +7,120 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Trend.Core.Data;
+using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class T_SavedChartController : BaseAdminController
+    public class ChartDataController : BaseAdminController
     {
         private TrendData db = new TrendData();
 
-        // GET: Admin/T_SavedChart
+        // GET: Admin/T_ChartData
         public ActionResult Index()
         {
-            var t_SavedChart = db.T_SavedChart.Include(t => t.AspNetUser);
-            return View(t_SavedChart.ToList());
+            var t_ChartData = db.T_ChartData.Include(t => t.T_DataValue).Include(t => t.T_SavedChart);
+            return View(t_ChartData.ToList());
         }
 
-        // GET: Admin/T_SavedChart/Details/5
+        // GET: Admin/T_ChartData/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_SavedChart t_SavedChart = db.T_SavedChart.Find(id);
-            if (t_SavedChart == null)
+            T_ChartData t_ChartData = db.T_ChartData.Find(id);
+            if (t_ChartData == null)
             {
                 return HttpNotFound();
             }
-            return View(t_SavedChart);
+            return View(t_ChartData);
         }
 
-        // GET: Admin/T_SavedChart/Create
+        // GET: Admin/T_ChartData/Create
         public ActionResult Create()
         {
-            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id");
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name");
             return View();
         }
 
-        // POST: Admin/T_SavedChart/Create
+        // POST: Admin/T_ChartData/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,T_UserId,Name,Created,Updated")] T_SavedChart t_SavedChart)
+        public ActionResult Create([Bind(Include = "Id,T_SavedChartId,T_DataValueId")] T_ChartData t_ChartData)
         {
             if (ModelState.IsValid)
             {
-                db.T_SavedChart.Add(t_SavedChart);
+                db.T_ChartData.Add(t_ChartData);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
-            return View(t_SavedChart);
+            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            return View(t_ChartData);
         }
 
-        // GET: Admin/T_SavedChart/Edit/5
+        // GET: Admin/T_ChartData/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_SavedChart t_SavedChart = db.T_SavedChart.Find(id);
-            if (t_SavedChart == null)
+            T_ChartData t_ChartData = db.T_ChartData.Find(id);
+            if (t_ChartData == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
-            return View(t_SavedChart);
+            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            return View(t_ChartData);
         }
 
-        // POST: Admin/T_SavedChart/Edit/5
+        // POST: Admin/T_ChartData/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,T_UserId,Name,Created,Updated")] T_SavedChart t_SavedChart)
+        public ActionResult Edit([Bind(Include = "Id,T_SavedChartId,T_DataValueId")] T_ChartData t_ChartData)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_SavedChart).State = EntityState.Modified;
+                db.Entry(t_ChartData).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_UserId = new SelectList(db.AspNetUsers, "Id", "Email", t_SavedChart.T_UserId);
-            return View(t_SavedChart);
+            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            return View(t_ChartData);
         }
 
-        // GET: Admin/T_SavedChart/Delete/5
+        // GET: Admin/T_ChartData/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            T_SavedChart t_SavedChart = db.T_SavedChart.Find(id);
-            if (t_SavedChart == null)
+            T_ChartData t_ChartData = db.T_ChartData.Find(id);
+            if (t_ChartData == null)
             {
                 return HttpNotFound();
             }
-            return View(t_SavedChart);
+            return View(t_ChartData);
         }
 
-        // POST: Admin/T_SavedChart/Delete/5
+        // POST: Admin/T_ChartData/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            T_SavedChart t_SavedChart = db.T_SavedChart.Find(id);
-            db.T_SavedChart.Remove(t_SavedChart);
+            T_ChartData t_ChartData = db.T_ChartData.Find(id);
+            db.T_ChartData.Remove(t_ChartData);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

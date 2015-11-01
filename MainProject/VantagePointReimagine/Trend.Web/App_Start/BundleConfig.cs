@@ -27,7 +27,8 @@ namespace Trend.Web
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
                       "~/Scripts/SignalR.StockTicker.js",
-                       "~/Scripts/jquery.signalR-2.2.0.js"));
+                       "~/Scripts/jquery.signalR-2.2.0.js",
+                       "~/SignalRChart/SignalR.Chart.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
@@ -36,7 +37,8 @@ namespace Trend.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/StockTicker.css"));
+                      "~/Content/StockTicker.css",
+                      "~/Content/dashboard.css"));
            
         }
     }

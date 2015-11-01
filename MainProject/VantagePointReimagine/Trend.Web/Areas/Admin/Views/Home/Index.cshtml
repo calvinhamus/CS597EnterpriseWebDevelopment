@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Admin";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -23,15 +24,15 @@
     <div class="col-md-4">
         <h2>Create or Modify PLC's</h2>
 
-        @Html.ActionLink("Manage PLC's", "", "T_Plc") <br/>
-        @Html.ActionLink("Manage Users PLC's", "", "T_UserPlc")<br />
-        @Html.ActionLink("Manage PLC Brands", "", "T_PlcBrand") 
+        @Html.ActionLink("Manage PLC's", "", "Plc") <br/>
+        @Html.ActionLink("Manage Users PLC's", "", "UserPlc")<br />
+        @Html.ActionLink("Manage PLC Brands", "", "PlcBrand") 
 
     </div>
     <div class="col-md-4">
         <h2>Add or Modify Data Points</h2>
 
-        @Html.ActionLink("Manage Data Points", "", "T_DataPoint")
+        @Html.ActionLink("Manage Data Points", "", "DataPoint")
 
     </div>
 </div>

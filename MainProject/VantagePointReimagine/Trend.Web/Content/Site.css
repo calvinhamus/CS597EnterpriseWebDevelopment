@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*canvas { 
+  height: 70vh; 
+  width: 70vw; 
+  display: block;
+}*/

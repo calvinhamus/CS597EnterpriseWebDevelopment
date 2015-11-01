@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Services\DataAccess\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
