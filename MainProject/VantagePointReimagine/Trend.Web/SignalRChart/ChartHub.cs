@@ -36,10 +36,10 @@ namespace Trend.Web.SignalRChart
         {
             throw new NotImplementedException();
         }
-        public string GetMarketState()
+        public string StartChartData()
         {
             _chartService.Ready();
-            return "Hello";
+            return "Ready";
         }
         public void Hello()
         {

@@ -42,5 +42,13 @@ namespace Trend.Web.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult GetChartData(GetDataModel data)
+        {
+            var points = db.T_DataValue.Where(x => x.DateTime <= data.EndDate && x.DateTime >= data.StartDate).Where(y=> data.DataPointIds.Contains(y.T_DataPoint));
+            return Json(points);
+        }
+
     }
 }

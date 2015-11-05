@@ -21,6 +21,12 @@ namespace Trend.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                       "~/Scripts/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                       "~/Scripts/bootstrap-datetimepicker.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
@@ -33,13 +39,18 @@ namespace Trend.Web
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                        "~/Scripts/Chart.js"));
+
+
+         
             //Change
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/StockTicker.css",
-                      "~/Content/dashboard.css"));
-           
+                      "~/Content/dashboard.css",
+                      "~/Content/bootstrap-datetimepicker.min.css"));
+
+          
         }
     }
 }

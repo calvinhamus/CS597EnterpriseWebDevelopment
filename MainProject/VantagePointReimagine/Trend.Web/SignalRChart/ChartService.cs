@@ -22,7 +22,7 @@ namespace Trend.Web.SignalRChart
         // Stock can go up or down by a percentage of this factor on each change
         private readonly double _rangePercent = 0.002;
 
-        private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(250);
+        private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(500);
         private readonly Random _updateOrNotRandom = new Random();
 
         private Timer _timer;
@@ -186,9 +186,9 @@ namespace Trend.Web.SignalRChart
         //        Clients.All.marketReset();
         //    }
 
-        private void BroadcastStockPrice(T_DataValue stock)
+        private void BroadcastStockPrice(T_DataValue chartData)
         {
-            Clients.All.updateStockPrice(stock);
+            Clients.All.updateChart(chartData);
         }
         //}
 

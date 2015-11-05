@@ -4,11 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/chart")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
- 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/chart")
+   
+  
+   
+
 
 </head>
 <body>
@@ -39,10 +45,12 @@
     </div>
 
   
-    @Scripts.Render("~/bundles/bootstrap")
+  
     @Scripts.Render("~/bundles/signalr")
     <script src="../Trend/signalr/hubs"></script>
-
+  
+   
     @RenderSection("scripts", required: false)
+   
 </body>
 </html>
