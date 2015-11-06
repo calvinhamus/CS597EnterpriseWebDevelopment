@@ -24,8 +24,10 @@ namespace Trend.Web
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                        "~/Scripts/moment.min.js"));
 
+            //bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+            //           "~/Scripts/bootstrap-datetimepicker.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
-                       "~/Scripts/bootstrap-datetimepicker.min.js"));
+                       "~/Scripts/bootstrap-material-datetimepicker.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
@@ -35,6 +37,10 @@ namespace Trend.Web
                       "~/Scripts/SignalR.StockTicker.js",
                        "~/Scripts/jquery.signalR-2.2.0.js",
                        "~/SignalRChart/SignalR.Chart.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/material").Include(
+                    "~/Scripts/material/ripples.min.js",
+                     "~/Scripts/material/material.min.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
@@ -48,9 +54,18 @@ namespace Trend.Web
                       "~/Content/site.css",
                       "~/Content/StockTicker.css",
                       "~/Content/dashboard.css",
-                      "~/Content/bootstrap-datetimepicker.min.css"));
+                      "~/Content/bootstrap-material-datetimepicker.css"));
 
-          
+            //bundles.Add(new StyleBundle("~/Content/material").Include(
+            //        "~/Content/material/roboto.min.css",
+            //        "~/Content/material/material.min.css",
+            //        "~/Content/material/ripples.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/material").Include(
+                   "~/Content/material/roboto.css",
+                   "~/Content/material/material.css",
+                   "~/Content/material/ripples.css"));
+
         }
     }
 }

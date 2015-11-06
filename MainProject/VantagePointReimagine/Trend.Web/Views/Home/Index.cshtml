@@ -106,30 +106,46 @@
     </div> <!--End Sidebar-->
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <nav class="navbar navbar-default ">
+     
 
-              <div class="container">
-
-                  <div class='col-md-4 navbar-btn'>
-                       <div class="form-group">
-                      <div class='input-group date' id='datetimepicker1'>
-                          <input type='text' class="form-control" placeholder="Start Date" />
-                          <span class="input-group-addon" style="width: 0%">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
+              <div class="container well">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-control-wrapper">
+                                      <div class="form-control-wrapper"><input type="text" id="date-start" class="form-control" data-dtp="dtp_XaHNb"><div class="floating-label">Start Date</div><span class="material-input"></span></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-control-wrapper">
+                                      <div class="form-control-wrapper"><input type="text" id="date-end" class="form-control" data-dtp="dtp_YpNtn"><div class="floating-label">End Date</div><span class="material-input"></span></div>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                         </div>
+                   
                   </div>
-                  <div class='col-md-4 navbar-btn'>
-                       <div class="form-group">
-                      <div class='input-group date' id='datetimepicker2'>
-                          <input type='text' class="form-control" placeholder="End Date"/>
-                          <span class="input-group-addon" style="width: 0%">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
+                  @*<div class='col-md-4 navbar-btn'>*@
+                  @*<div class="col-md-6">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-control-wrapper">
+                                  <div class="form-control-wrapper"><input type="text" id="date-start" class="form-control" data-dtp="dtp_XaHNb"><div class="floating-label">Start Date</div><span class="material-input"></span></div>
+                              </div>
+                          </div>
                       </div>
-                         </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-control-wrapper">
+                                  <div class="form-control-wrapper"><input type="text" id="date-end" class="form-control" data-dtp="dtp_YpNtn"><div class="floating-label">End Date</div><span class="material-input"></span></div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
+                      
 
                   <div class='col-md-2 navbar-btn'>
                       <div class="form-group">
@@ -137,12 +153,17 @@
                       </div>
                   </div>
                   <div class='col-sm-2 navbar-btn'>
-                      <div class="form-group">
+                      <div class="togglebutton">
+                          <label>
+                              <input type="checkbox" checked=""> Toggle button
+                          </label>
+                      </div>*@
+                      @*<div class="form-group">
                           <div type="button" class="btn btn-danger btn-xs" id="liveMode">Live Mode</div>
-                      </div>
+                      </div>*@
                   </div>
               </div>
-        </nav>
+      
         <h1 class="page-header">Dashboard</h1>
 
         <div class="row placeholders">

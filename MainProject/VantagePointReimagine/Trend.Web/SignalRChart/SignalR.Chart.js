@@ -42,36 +42,25 @@ $(function () {
 
     });
 });
-$(function () {
-    $('#datetimepicker1').datetimepicker();
-    $('#datetimepicker2').datetimepicker({
-        useCurrent: false //Important! See issue #1075
-    });
-    $("#datetimepicker1").on("dp.change", function (e) {
-        $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-        var x = $('#datetimepicker2').data("DateTimePicker").date()
-        console.log(x._i );
-    });
-    $("#datetimepicker2").on("dp.change", function (e) {
-        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
-        console.log(e.date);
-    });
+$('#date-end').bootstrapMaterialDatePicker({format:'DD/MM/YYYY HH:mm', weekStart: 0 });
+$('#date-start').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
+    $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
 });
-$("#getDataBtn").click(function () {
-    var startDate = $('#datetimepicker1').data("DateTimePicker").date();
-    var endDate = $('#datetimepicker2').data("DateTimePicker").date();
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        cache: false,
-        url: '/Trend/Home/GetChartData',
-        data: { StartDate: startDate._i, EndDate: endDate._i },
-        success: function (response, textStatus, jqXHR) {
-            alert(response);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('Error - ' + errorThrown);
-        }
-    });
+//$("#getDataBtn").click(function () {
+//    var startDate = $('#datetimepicker1').data("DateTimePicker").date();
+//    var endDate = $('#datetimepicker2').data("DateTimePicker").date();
+//    $.ajax({
+//        type: 'post',
+//        dataType: 'json',
+//        cache: false,
+//        url: '/Trend/Home/GetChartData',
+//        data: { StartDate: startDate._i, EndDate: endDate._i },
+//        success: function (response, textStatus, jqXHR) {
+//            alert(response);
+//        },
+//        error: function (jqXHR, textStatus, errorThrown) {
+//            alert('Error - ' + errorThrown);
+//        }
+//    });
 
-});
+//});

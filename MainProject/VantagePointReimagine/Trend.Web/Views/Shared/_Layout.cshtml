@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/material")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/moment")
@@ -12,7 +13,7 @@
     @Scripts.Render("~/bundles/datepicker")
     @Scripts.Render("~/bundles/chart")
    
-  
+    
    
 
 
@@ -45,12 +46,17 @@
     </div>
 
   
-  
+   @Scripts.Render("~/bundles/material") 
     @Scripts.Render("~/bundles/signalr")
     <script src="../Trend/signalr/hubs"></script>
   
    
     @RenderSection("scripts", required: false)
-   
+    <script>
+            $(document).ready(function() {
+                // This command is used to initialize some elements and make them work properly
+                $.material.init();
+            });
+    </script>
 </body>
 </html>
