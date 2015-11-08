@@ -41,11 +41,23 @@ $(function () {
 
 
     });
+
+    $('.mdi-content-add').click(function (e) {
+        console.log(e.currentTarget.id);
+        signalrchart.server.addToChart(e.currentTarget.id);
+
+    });
+    $('.mdi-content-remove').click(function (e) {
+        console.log(e.currentTarget.id);
+         signalrchart.server.removeFromChart(e.currentTarget.id);
+
+    });
 });
 $('#date-end').bootstrapMaterialDatePicker({format:'DD/MM/YYYY HH:mm', weekStart: 0 });
 $('#date-start').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
     $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
 });
+
 //$("#getDataBtn").click(function () {
 //    var startDate = $('#datetimepicker1').data("DateTimePicker").date();
 //    var endDate = $('#datetimepicker2').data("DateTimePicker").date();

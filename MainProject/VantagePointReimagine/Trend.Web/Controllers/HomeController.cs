@@ -18,8 +18,10 @@ namespace Trend.Web.Controllers
             var user = User.Identity.GetUserId();
             var vm = new MainVM();
             var plcs = db.T_UserPlc.Where(y => y.T_UserId.Equals(user)).ToList();
-           
+            var charts = db.T_SavedChart.Where(y => y.T_UserId.Equals(user)).ToList();
+
             vm.Plcs = plcs.Select(x =>x.T_Plc).ToList();
+            vm.Charts = charts;
             return View("Index",vm);
         }
 

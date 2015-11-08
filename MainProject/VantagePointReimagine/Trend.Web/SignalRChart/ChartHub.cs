@@ -28,6 +28,10 @@ namespace Trend.Web.SignalRChart
         {
             throw new NotImplementedException();
         }
+        public void RemoveFromChart(int id)
+        {
+            throw new NotImplementedException();
+        }
         public T_SavedChart LoadChart(int chartId)
         {
             throw new NotImplementedException();
