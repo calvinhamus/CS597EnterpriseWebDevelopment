@@ -214,6 +214,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GetDataModel.cs" />
+    <Compile Include="Models\HubClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MainVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="SignalRChart\ChartHub.cs" />
     <Compile Include="SignalRChart\ChartService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UserProvider\CustomUserIdProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-material-datetimepicker.css" />

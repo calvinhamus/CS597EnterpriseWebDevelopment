@@ -1,4 +1,5 @@
 ﻿var running = false;
+var myClientId = "";
 $(function () {
   
     var signalrchart = $.connection.signalrchart // the generated client-side hub proxy
@@ -27,6 +28,8 @@ $(function () {
       //  .then(init)
         .then(function () {
             console.log("Connected");
+            myClientId = $.connection.hub.id;
+            console.log(myClientId);
             // return signalrchart.server.startChartData();
         })
         .done(function (state) {
@@ -34,7 +37,7 @@ $(function () {
         });
     $("#liveMode").click(function () {
         if (!running) {
-            signalrchart.server.startChartData();
+            signalrchart.server.startChartData(myClientId);
             running = true;
         }
         running = false;

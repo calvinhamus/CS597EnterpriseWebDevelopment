@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Trend.Core.Data;
+using Trend.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Trend.Web.SignalRChart
 {
@@ -77,6 +79,20 @@ namespace Trend.Web.SignalRChart
 
               
         }
+
+        internal void SaveChart(HubClient client)
+        {
+            //var user = User.Identity.GetUserId();
+            //var chart = new T_SavedChart
+            //{
+            //    T_UserId = ,
+
+            //}
+
+            throw new NotImplementedException();
+        }
+
+       
 
         //    public void CloseMarket()
         //    {
