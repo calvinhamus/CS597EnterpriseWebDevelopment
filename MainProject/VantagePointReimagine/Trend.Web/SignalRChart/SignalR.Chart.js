@@ -1,5 +1,6 @@
-﻿var running = false;
-var myClientId = "";
+﻿var myClientId = "";
+var startDate = "";
+var endDate = "";
 $(function () {
   
     var signalrchart = $.connection.signalrchart // the generated client-side hub proxy
@@ -35,12 +36,21 @@ $(function () {
         .done(function (state) {
            
         });
-    $("#liveMode").click(function () {
-        if (!running) {
+    $("#liveMode").change(function () {
+        console.log(this.checked);
+        if (this.checked) {
             signalrchart.server.startChartData(myClientId);
-            running = true;
+        } else {
+            signalrchart.server.stopChartData(myClientId);
         }
-        running = false;
+        //if (!running) {
+        //    running = true;
+        //    signalrchart.server.startChartData(myClientId);
+
+        //} else {
+        //    running = false;
+        //    signalrchart.server.stopChartData(myClientId);
+        //}
 
 
     });
@@ -56,26 +66,37 @@ $(function () {
 
     });
 });
-$('#date-end').bootstrapMaterialDatePicker({format:'DD/MM/YYYY HH:mm', weekStart: 0 });
-$('#date-start').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
+$('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
+    console.log(date._i);
+    endDate = date._i;
+});
+$('#date-start').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function(e, date) {
     $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+    startDate = date._i;
 });
 
-//$("#getDataBtn").click(function () {
-//    var startDate = $('#datetimepicker1').data("DateTimePicker").date();
-//    var endDate = $('#datetimepicker2').data("DateTimePicker").date();
-//    $.ajax({
-//        type: 'post',
-//        dataType: 'json',
-//        cache: false,
-//        url: '/Trend/Home/GetChartData',
-//        data: { StartDate: startDate._i, EndDate: endDate._i },
-//        success: function (response, textStatus, jqXHR) {
-//            alert(response);
-//        },
-//        error: function (jqXHR, textStatus, errorThrown) {
-//            alert('Error - ' + errorThrown);
-//        }
-//    });
+$("#getDataBtn").click(function () {
+    console.log(startDate + " " + endDate);
+    if (startDate != "" && endDate != "") {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            url: '/Trend/Home/GetChartData',
+            data: { StartDate: startDate, EndDate: endDate },
+            success: function (response, textStatus, jqXHR) {
+                alert(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    }
 
-//});
+    //var startDate = $('#date-end').bootstrapMaterialDatePicker().date;
+    //console.log(startDate);
+    //var endDate = $('#datetimepicker2').data("DateTimePicker").date();
+    
+   
+
+});

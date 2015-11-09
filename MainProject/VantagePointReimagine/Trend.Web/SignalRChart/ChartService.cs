@@ -13,6 +13,8 @@ namespace Trend.Web.SignalRChart
 {
     public class ChartService 
     {
+        private TrendData db = new TrendData();
+
         private readonly static Lazy<ChartService> _instance = new Lazy<ChartService>(
             () => new ChartService(GlobalHost.ConnectionManager.GetHubContext<ChartHub>().Clients));
 
@@ -83,11 +85,15 @@ namespace Trend.Web.SignalRChart
         internal void SaveChart(HubClient client)
         {
             //var user = User.Identity.GetUserId();
-            //var chart = new T_SavedChart
-            //{
-            //    T_UserId = ,
+            var user = db.AspNetUsers.FirstOrDefault(x => x.UserName == client.UserName);
+            var chart = new T_SavedChart
+            {
+                T_UserId = user.Id,
+                Created = DateTime.Now,
+                Name = ""
 
-            //}
+
+            };
 
             throw new NotImplementedException();
         }
@@ -201,7 +207,11 @@ namespace Trend.Web.SignalRChart
         //    {
         //        Clients.All.marketReset();
         //    }
-
+        public void Stop()
+        {
+            _updatingStockPrices = false;
+            _timer?.Dispose();
+        }
         private void BroadcastStockPrice(T_DataValue chartData)
         {
             Clients.All.updateChart(chartData);

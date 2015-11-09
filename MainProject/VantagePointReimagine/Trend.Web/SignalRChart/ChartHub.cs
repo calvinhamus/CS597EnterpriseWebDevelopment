@@ -7,7 +7,7 @@ using Trend.Core.Data;
 using Microsoft.AspNet.SignalR.Hubs;
 using Trend.Web.Models;
 using System.Threading.Tasks;
-
+using Microsoft.AspNet.Identity;
 
 namespace Trend.Web.SignalRChart
 {
@@ -25,15 +25,10 @@ namespace Trend.Web.SignalRChart
         }
         public override Task OnConnected()
         {
-            var user = Context.User;
-            string name;
-            if (user.Identity.IsAuthenticated)
-            {
-                name = user.Identity.Name;
-            }
 
+            var user =  Context.User.Identity.Name;
             var id = Context.ConnectionId;
-            AddUserToHub(id);
+            AddUserToHub(id,user);
 
             return base.OnConnected();
         }
@@ -94,12 +89,17 @@ namespace Trend.Web.SignalRChart
             _chartService.Ready();
             return "Ready";
         }
-
-        private void AddUserToHub(string clientId)
+        public string StopChartData(string clientId)
+        {
+            _chartService.Stop();
+            return "Stopped";
+        }
+        private void AddUserToHub(string clientId, string userName)
         {
             var hubClient = new HubClient
             {
-                UserId = clientId
+                UserId = clientId,
+                UserName = userName
             };
             HubClients.Add(hubClient);
 
