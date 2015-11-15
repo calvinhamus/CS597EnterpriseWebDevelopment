@@ -9,6 +9,7 @@ namespace Trend.Web.Models
     {
         public string UserName { get; set; }
         public string UserId { get; set; }
-        public List<int> ChatIds { get; set; }
+        public List<int> DataPointIds { get; set; }
+
     }
 }

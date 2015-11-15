@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Trend.Core.Data;
-using Trend.Core.Services;
+using Trend.Web.SignalRChart;
+//using Trend.Core.Services;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
@@ -16,9 +17,6 @@ namespace Trend.Web.Areas.Admin.Controllers
         private IDummyPlcService _DummyService;
         private TrendData db = new TrendData();
 
-
-
-    
 
         // GET: Admin/DummyPlc
         public ActionResult Index()

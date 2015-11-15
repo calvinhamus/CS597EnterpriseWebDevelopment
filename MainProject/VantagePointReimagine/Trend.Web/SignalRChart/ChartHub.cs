@@ -17,9 +17,10 @@ namespace Trend.Web.SignalRChart
     {
         public List<HubClient> HubClients = new List<HubClient>();
         private readonly ChartService _chartService;
+        private DummyPlcService _dummyPlcService;
 
         public ChartHub() :
-            this(ChartService.Instance)
+            this(ChartService.Instance, DummyPlcService.Instance)
         {
 
         }
@@ -28,7 +29,8 @@ namespace Trend.Web.SignalRChart
 
             var user =  Context.User.Identity.Name;
             var id = Context.ConnectionId;
-            AddUserToHub(id,user);
+            Clients.Caller.HubClient = AddUserToHub(id, user);
+            Clients.Caller.initialized();
 
             return base.OnConnected();
         }
@@ -52,27 +54,35 @@ namespace Trend.Web.SignalRChart
         //    return base.OnReconnected();
         //}
     
-        public ChartHub(ChartService chartService)
+        public ChartHub(ChartService chartService, DummyPlcService dummyPlcService)
         {
             _chartService = chartService;
+            _dummyPlcService = dummyPlcService;
         }
-        public void AddToChart(string clientId, int chartId)
+        public void AddToChart(string clientId, int dataPointId)
         {
-             var client = GetUser(clientId);
-            client.ChatIds.Add(chartId);
-         
-        }
+            var  hubClient = Clients.Caller.HubClient;
 
-        private HubClient GetUser(string clientId)
-        {
-            return HubClients.Find(x => x.UserId == clientId);
-           // throw new NotImplementedException();
-        }
+            var points = hubClient["DataPointIds"];
+            points.Add(dataPointId);
 
-        public void RemoveFromChart(string clientId, int chartId)
+            hubClient["DataPointIds"] = points;
+            Clients.Caller.HubClient = hubClient;
+
+            var point = _chartService.GetPoint(dataPointId);
+            
+            Clients.Caller.addToLegend(point);
+
+        }
+        public void RemoveFromChart(string clientId, long dataPointId)
         {
-            var client = GetUser(clientId);
-            client.ChatIds.Remove(chartId);
+            var hubClient = Clients.Caller.HubClient;
+
+            var points = hubClient["DataPointIds"];
+            points.Remove(dataPointId);
+
+            hubClient["DataPointIds"] = points;
+            Clients.Caller.HubClient = hubClient;
         }
         public T_SavedChart LoadChart(int chartId)
         {
@@ -80,28 +90,39 @@ namespace Trend.Web.SignalRChart
         }
         public bool SaveChart(string clientId)
         {
-            var client = GetUser(clientId);
-            _chartService.SaveChart(client);
+            var hubClient = Clients.Caller.HubClient;
+            _chartService.SaveChart(hubClient["UserName"]);
             throw new NotImplementedException();
         }
         public string StartChartData(string clientId)
-        {     
-            _chartService.Ready();
+        {
+            var hubClient = Clients.Caller.HubClient;
+            //var client = GetUser(clientId);
+           
+            //_chartService.Ready();
+            var points = hubClient["DataPointIds"];
+            _dummyPlcService.StartDummyPlc(points);
             return "Ready";
         }
         public string StopChartData(string clientId)
         {
-            _chartService.Stop();
+            //_chartService.Stop();
+            _dummyPlcService.StopDummyPlc(0);
             return "Stopped";
         }
-        private void AddUserToHub(string clientId, string userName)
+        private HubClient AddUserToHub(string clientId, string userName)
         {
+
+            var holder = new List<int>();
+           // holder.Add(2);
+          //  holder.Add(3);
             var hubClient = new HubClient
             {
                 UserId = clientId,
-                UserName = userName
+                UserName = userName,
+                DataPointIds = holder
             };
-            HubClients.Add(hubClient);
+            return hubClient;
 
         }
 

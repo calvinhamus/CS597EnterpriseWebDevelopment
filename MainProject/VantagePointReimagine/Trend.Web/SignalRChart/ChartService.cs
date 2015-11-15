@@ -8,6 +8,7 @@ using System.Threading;
 using Trend.Core.Data;
 using Trend.Web.Models;
 using Microsoft.AspNet.Identity;
+using Trend.Core.Helpers;
 
 namespace Trend.Web.SignalRChart
 {
@@ -53,39 +54,27 @@ namespace Trend.Web.SignalRChart
             set;
         }
 
-        //    public MarketState MarketState
-        //    {
-        //        get { return _marketState; }
-        //        private set { _marketState = value; }
-        //    }
 
-        //    public IEnumerable<Stock> GetAllStocks()
-        //    {
-        //        return _stocks.Values;
-        //    }
-
-        public void Ready()
+        internal ReturnPointData GetPoint(int dataPointId)
         {
-            _stocks.Clear();
-
-            var stocks = new List<T_DataValue>
-                    {
-                        new T_DataValue {Id = 1, Value = 41.68m },
-                        new T_DataValue { Id = 2, Value = 92.08m },
-                        new T_DataValue { Id = 3, Value = 543.01m }
-                    };
-
-            stocks.ForEach(stock => _stocks.TryAdd(stock.Id, stock));
-
-            _timer = new Timer(UpdateStockPrices, null, _updateInterval, _updateInterval);
-
-              
+            var point = db.T_DataPoint.Where(x => x.Id.Equals(dataPointId)).FirstOrDefault();
+            var pointAndStrokeColor = RandomColorGenerator.GetRandomColor();
+            return new ReturnPointData
+            {
+                StrokeColor = pointAndStrokeColor,
+                PointColor = pointAndStrokeColor,
+                Label = point.Name,
+                PointHighlightFill = "#fff",
+                PointHighlightStroke = "rgba(151,187,205,1)",
+                PointStrokeColor = "#fff",
+                FillColor = RandomColorGenerator.GetRandomColor()
+            };
         }
 
-        internal void SaveChart(HubClient client)
+        internal void SaveChart(string username)
         {
             //var user = User.Identity.GetUserId();
-            var user = db.AspNetUsers.FirstOrDefault(x => x.UserName == client.UserName);
+            var user = db.AspNetUsers.FirstOrDefault(x => x.UserName == username);
             var chart = new T_SavedChart
             {
                 T_UserId = user.Id,
@@ -98,130 +87,13 @@ namespace Trend.Web.SignalRChart
             throw new NotImplementedException();
         }
 
-       
 
-        //    public void CloseMarket()
-        //    {
-        //        lock (_marketStateLock)
-        //        {
-        //            if (MarketState == MarketState.Open)
-        //            {
-        //                if (_timer != null)
-        //                {
-        //                    _timer.Dispose();
-        //                }
-
-        //                MarketState = MarketState.Closed;
-
-        //                BroadcastMarketStateChange(MarketState.Closed);
-        //            }
-        //        }
-        //    }
-
-        //    public void Reset()
-        //    {
-        //        lock (_marketStateLock)
-        //        {
-        //            if (MarketState != MarketState.Closed)
-        //            {
-        //                throw new InvalidOperationException("Market must be closed before it can be reset.");
-        //            }
-
-        //            LoadDefaultStocks();
-        //            BroadcastMarketReset();
-        //        }
-        //    }
-
-        //    private void LoadDefaultStocks()
-        //    {
-        //        _stocks.Clear();
-
-        //        var stocks = new List<Stock>
-        //        {
-        //            new Stock { Symbol = "MSFT", Price = 41.68m },
-        //            new Stock { Symbol = "AAPL", Price = 92.08m },
-        //            new Stock { Symbol = "GOOG", Price = 543.01m }
-        //        };
-
-        //        stocks.ForEach(stock => _stocks.TryAdd(stock.Symbol, stock));
-        //    }
-
-        private void UpdateStockPrices(object state)
-        {
-            // This function must be re-entrant as it's running as a timer interval handler
-            lock (_updateStockPricesLock)
-            {
-                if (!_updatingStockPrices)
-                {
-                    _updatingStockPrices = true;
-
-                    foreach (var stock in _stocks.Values)
-                    {
-                        if (TryUpdateStockPrice(stock))
-                        {
-                            BroadcastStockPrice(stock);
-                        }
-                    }
-
-                    _updatingStockPrices = false;
-                }
-            }
-        }
-
-        private bool TryUpdateStockPrice(T_DataValue stock)
-        {
-            // Randomly choose whether to udpate this stock or not
-            var r = _updateOrNotRandom.NextDouble();
-            if (r > 0.1)
-            {
-                return false;
-            }
-
-            // Update the stock price by a random factor of the range percent
-            var random = new Random((int)Math.Floor(stock.Value));
-            var percentChange = random.NextDouble() * _rangePercent;
-            var pos = random.NextDouble() > 0.51;
-            var change = Math.Round(stock.Value * (decimal)percentChange, 2);
-            change = pos ? change : -change;
-
-            stock.Value += change;
-            return true;
-        }
-
-        //    private void BroadcastMarketStateChange(MarketState marketState)
-        //    {
-        //        switch (marketState)
-        //        {
-        //            case MarketState.Open:
-        //                Clients.All.marketOpened();
-        //                break;
-        //            case MarketState.Closed:
-        //                Clients.All.marketClosed();
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-
-        //    private void BroadcastMarketReset()
-        //    {
-        //        Clients.All.marketReset();
-        //    }
+      
         public void Stop()
         {
             _updatingStockPrices = false;
             _timer?.Dispose();
         }
-        private void BroadcastStockPrice(T_DataValue chartData)
-        {
-            Clients.All.updateChart(chartData);
-        }
-        //}
-
-        //public enum MarketState
-        //{
-        //    Closed,
-        //    Open
-        //}
+     
     }
 }

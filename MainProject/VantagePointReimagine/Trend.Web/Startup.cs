@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Owin;
-using Trend.Web.UserProvider;
 
 [assembly: OwinStartupAttribute(typeof(Trend.Web.Startup))]
 namespace Trend.Web

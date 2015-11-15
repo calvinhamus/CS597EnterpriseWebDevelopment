@@ -46,8 +46,11 @@ namespace Trend.Web
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                        "~/Scripts/Chart.js"));
 
+            //bundles.Add(new ScriptBundle("~/bundles/chart").Include(
+            //          "~/Scripts/Flot/jquery.flot.js"));
 
-         
+
+
             //Change
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
