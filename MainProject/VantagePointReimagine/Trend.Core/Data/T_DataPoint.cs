@@ -27,7 +27,6 @@ namespace Trend.Core.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_DataValue> T_DataValue { get; set; }
 
-        [NotMapped]
-        public string HexColor { get; set; }
+      
     }
 }

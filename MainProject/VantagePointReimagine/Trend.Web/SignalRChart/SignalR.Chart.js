@@ -72,7 +72,7 @@ var options = {
 
     //String - A legend template
    // legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-    legendTemplate: '<ul>'
+    legendTemplate: '<ul id="legendUl">'
                   + '<% for (var i=0; i<datasets.length; i++) { %>'
                     + '<li>'
                     + '<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
@@ -84,15 +84,7 @@ var options = {
 
 
 
-// Get the context of the canvas element we want to select
-var ctx = document.getElementById("myChart").getContext("2d");
 
- window.myLineChart = new Chart(ctx).Line(data, options);
-
-var legend = myLineChart.generateLegend();
-
-//and append it to your page somewhere
-$('#legendDiv').append(legend);
 
 
 var myClientId = "";
@@ -100,6 +92,16 @@ var startDate = "";
 var endDate = "";
 $(function () {
   
+
+    // Get the context of the canvas element we want to select
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    window.myLineChart = new Chart(ctx).Line(data, options);
+
+  //  var legend = myLineChart.generateLegend();
+
+    //and append it to your page somewhere
+   // $('#legendDiv').append(legend);
     var signalrchart = $.connection.signalrchart // the generated client-side hub proxy
        
   
@@ -134,8 +136,15 @@ $(function () {
                 pointHighlightStroke: data.PointHighlightStroke,
                 data: [0,0,0,0]
             }
-            datasets.push(a);
+            //datasets.push(a);
+            var x = window.myLineChart.datasets;
+            window.myLineChart.datasets.push(a);
+            window.myLineChart.update();
 
+            var legend = myLineChart.generateLegend();
+            $('#legendUl').remove();
+            //and append it to your page somewhere
+            $('#legendDiv').append(legend);
         }
 
     });
@@ -173,55 +182,56 @@ $(function () {
         signalrchart.server.removeFromChart($.connection.hub.id,e.currentTarget.id);
 
     });
-});
-$('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
-    console.log(date._i);
-    endDate = date._i;
-});
-$('#date-start').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function(e, date) {
-    $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
-    startDate = date._i;
-});
 
-$("#getDataBtn").click(function () {
+    $('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
+        console.log(date._i);
+        endDate = date._i;
+    });
+    $('#date-start').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function(e, date) {
+        $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+        startDate = date._i;
+    });
 
-    window.myLineChart.destroy();
-    console.log(startDate + " " + endDate);
-    if (startDate != "" && endDate != "") {
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            cache: false,
-            url: '/Trend/Home/GetChartData',
-            data: { StartDate: startDate, EndDate: endDate },
-            success: function (response, textStatus, jqXHR) {
-                alert(response);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error - ' + errorThrown);
-            }
-        });
-    }
-    //var ctx = document.getElementById("myChart").getContext("2d");
-    //// var myNewChart = new Chart(ctx).PolarArea(data);
+    $("#getDataBtn").click(function () {
 
-    //var newData =
-    //{
-    //    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    //    datasets: datasets
-    //}
+        window.myLineChart.destroy();
+        console.log(startDate + " " + endDate);
+        if (startDate != "" && endDate != "") {
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                url: '/Trend/Home/GetChartData',
+                data: { StartDate: startDate, EndDate: endDate },
+                success: function (response, textStatus, jqXHR) {
+                    alert(response);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        }
+        //var ctx = document.getElementById("myChart").getContext("2d");
+        //// var myNewChart = new Chart(ctx).PolarArea(data);
+
+        //var newData =
+        //{
+        //    labels: ["January", "February", "March", "April", "May", "June", "July"],
+        //    datasets: datasets
+        //}
    
 
-    //window.myLineChart = new Chart(ctx).Line(newData, options);
+        //window.myLineChart = new Chart(ctx).Line(newData, options);
 
-    //var legend = window.myLineChart.generateLegend();
+        //var legend = window.myLineChart.generateLegend();
 
-    ////and append it to your page somewhere
-    //$('#legendDiv').append(legend);
-    //var startDate = $('#date-end').bootstrapMaterialDatePicker().date;
-    //console.log(startDate);
-    //var endDate = $('#datetimepicker2').data("DateTimePicker").date();
+        ////and append it to your page somewhere
+        //$('#legendDiv').append(legend);
+        //var startDate = $('#date-end').bootstrapMaterialDatePicker().date;
+        //console.log(startDate);
+        //var endDate = $('#datetimepicker2').data("DateTimePicker").date();
     
    
 
+    });
 });
