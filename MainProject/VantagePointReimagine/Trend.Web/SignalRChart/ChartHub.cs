@@ -65,7 +65,7 @@ namespace Trend.Web.SignalRChart
 
             var points = hubClient["DataPointIds"];
             points.Add(dataPointId);
-
+            
             hubClient["DataPointIds"] = points;
             Clients.Caller.HubClient = hubClient;
 
@@ -74,15 +74,27 @@ namespace Trend.Web.SignalRChart
             Clients.Caller.addToLegend(point);
 
         }
-        public void RemoveFromChart(string clientId, long dataPointId)
+        public void RemoveFromChart(string clientId, int dataPointId)
         {
             var hubClient = Clients.Caller.HubClient;
 
             var points = hubClient["DataPointIds"];
-            points.Remove(dataPointId);
+            var newPoints = new List<long>(); 
+           foreach(var z in points)
+            {
+                if (z != dataPointId)
+                {
+                    newPoints.Add(z);
+                }
 
-            hubClient["DataPointIds"] = points;
+            }
+            
+            hubClient["DataPointIds"] = newPoints;
             Clients.Caller.HubClient = hubClient;
+          
+            var point = _chartService.GetPoint(dataPointId);
+
+            Clients.Caller.removeFromLegend(point);
         }
         public T_SavedChart LoadChart(int chartId)
         {

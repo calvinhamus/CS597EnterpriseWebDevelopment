@@ -25,19 +25,7 @@ namespace Trend.Web.Controllers
             return View("Index",vm);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
         public ActionResult StockTicker()
         {
             ViewBag.Message = "Your contact page.";
@@ -48,8 +36,19 @@ namespace Trend.Web.Controllers
         [HttpPost]
         public ActionResult GetChartData(GetDataModel data)
         {
-            var points = db.T_DataValue.Where(x => x.DateTime <= data.EndDate && x.DateTime >= data.StartDate).Where(y=> data.DataPointIds.Contains(y.T_DataPoint));
-            return Json(points);
+            
+            var y = (from t in db.T_DataValue
+                     where t.DateTime <= data.EndDate
+                     && t.DateTime >= data.StartDate
+                     select new ValueAndLabel
+                     {
+                         Value = t.Value,
+                         Label = t.DateTime.ToString()
+
+                     });
+            var points = db.T_DataValue.Where(x => x.DateTime <= data.EndDate && x.DateTime >= data.StartDate).Where(y=> data.DataPointIds.Contains(y.T_DataPoint)).OrderBy(y =>y.T_DataPoint).ToList();
+           
+            return Json(points.ToList());
         }
 
     }

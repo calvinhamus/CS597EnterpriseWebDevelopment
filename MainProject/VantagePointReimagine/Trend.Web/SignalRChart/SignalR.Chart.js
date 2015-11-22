@@ -89,7 +89,7 @@ var myClientId = "";
 var startDate = "";
 var endDate = "";
 $(function () {
-
+    var dataPoints = [];
     var chartdata = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -213,7 +213,7 @@ $(function () {
                 pointStrokeColor: data.PointStrokeColor,
                 pointHighlightFill: data.PointHighlightFill,
                 pointHighlightStroke: data.PointHighlightStroke,
-                data: [10,10,10,10,10,10,100]
+                data: [0,0,0,0,0,0,0]
             }
             chartdata.datasets.push(a);
             console.log(chartdata)
@@ -224,6 +224,30 @@ $(function () {
             //var x = window.myLineChart.datasets;
            // myLineChart.datasets.push(a);
            // myLineChart.update();
+
+            var legend = myLineChart.generateLegend();
+            $('#legendUl').remove();
+            //and append it to your page somewhere
+            $('#legendDiv').append(legend);
+        },
+        removeFromLegend: function (data) {
+
+            for (var i = 0; i < chartdata.datasets.length; i++) {
+                var obj = chartdata.datasets[i];
+
+                if (data.Label == obj.label) {
+                    chartdata.datasets.splice(i, 1);
+                }
+            };
+           
+            console.log(chartdata)
+            ctx.clearRect(0, 0, myChart.width, myChart.height);
+            myLineChart.destroy();
+            myLineChart = new Chart(ctx).Line(chartdata, options);
+            //datasets.push(a);
+            //var x = window.myLineChart.datasets;
+            // myLineChart.datasets.push(a);
+            // myLineChart.update();
 
             var legend = myLineChart.generateLegend();
             $('#legendUl').remove();
@@ -255,14 +279,13 @@ $(function () {
     });
 
     $('.mdi-content-add').click(function (e) {
-        console.log(e.currentTarget.id);
-        console.log(e.currentTarget.parentElement.parentElement.innerText)
+        dataPoints.push(e.currentTarget.id);
         signalrchart.server.addToChart($.connection.hub.id, e.currentTarget.id);
-
-
     });
     $('.mdi-content-remove').click(function (e) {
         console.log(e.currentTarget.id);
+        var a = dataPoints.indexOf(e.currentTarget.id);
+        dataPoints.splice(a, 1);
         signalrchart.server.removeFromChart($.connection.hub.id,e.currentTarget.id);
 
     });
@@ -278,6 +301,8 @@ $(function () {
 
     $("#getDataBtn").click(function () {
 
+        var startDate = $('#date-start').val();
+        var endDate = $('#date-end').val();
         myLineChart.destroy();
         console.log(startDate + " " + endDate);
         if (startDate != "" && endDate != "") {
@@ -286,7 +311,7 @@ $(function () {
                 dataType: 'json',
                 cache: false,
                 url: '/Trend/Home/GetChartData',
-                data: { StartDate: startDate, EndDate: endDate },
+                data: { StartDate: startDate, EndDate: endDate, DataPointIds: dataPoints },
                 success: function (response, textStatus, jqXHR) {
                     alert(response);
                 },

@@ -216,10 +216,12 @@
     <Compile Include="Models\GetDataModel.cs" />
     <Compile Include="Models\HubClient.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LargeDataReturn.cs" />
     <Compile Include="Models\MainVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ReturnChartData.cs" />
     <Compile Include="Models\ReturnPointData.cs" />
+    <Compile Include="Models\ValueAndLabel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalR.Sample\Startup.cs" />
     <Compile Include="SignalR.Sample\Stock.cs" />
