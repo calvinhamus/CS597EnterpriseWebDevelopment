@@ -1,86 +1,84 @@
-﻿var datasets = [];
+﻿//var data = {
+//    labels: ["January", "February", "March", "April", "May", "June", "July"],
+//    datasets: [
+//        {
+//            label: "My First dataset",
+//            fillColor: "#1a4356",
+//            strokeColor: "rgba(220,220,220,1)",
+//            pointColor: "rgba(220,220,220,1)",
+//            pointStrokeColor: "#fff",
+//            pointHighlightFill: "#fff",
+//            pointHighlightStroke: "rgba(220,220,220,1)",
+//            data: [65, 59, 80, 81, 56, 55, 40]
+//        },
+//        {
+//            label: "My Second dataset",
+//            fillColor: "rgba(151,187,205,0.2)",
+//            strokeColor: "rgba(151,187,205,1)",
+//            pointColor: "rgba(151,187,205,1)",
+//            pointStrokeColor: "#fff",
+//            pointHighlightFill: "#fff",
+//            pointHighlightStroke: "rgba(151,187,205,1)",
+//            data: [28, 48, 40, 19, 86, 27, 90]
+//        }
+//    ]
+//};
 
-var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "#1a4356",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
+//var options = {
+//    animation: true,
+//    ///Boolean - Whether grid lines are shown across the chart
+//    scaleShowGridLines: true,
 
-var options = {
-    animation: true,
-    ///Boolean - Whether grid lines are shown across the chart
-    scaleShowGridLines: true,
+//    //String - Colour of the grid lines
+//    scaleGridLineColor: "rgba(0,0,0,.05)",
 
-    //String - Colour of the grid lines
-    scaleGridLineColor: "rgba(0,0,0,.05)",
+//    //Number - Width of the grid lines
+//    scaleGridLineWidth: 1,
 
-    //Number - Width of the grid lines
-    scaleGridLineWidth: 1,
+//    //Boolean - Whether to show horizontal lines (except X axis)
+//    scaleShowHorizontalLines: true,
 
-    //Boolean - Whether to show horizontal lines (except X axis)
-    scaleShowHorizontalLines: true,
+//    //Boolean - Whether to show vertical lines (except Y axis)
+//    scaleShowVerticalLines: true,
 
-    //Boolean - Whether to show vertical lines (except Y axis)
-    scaleShowVerticalLines: true,
+//    //Boolean - Whether the line is curved between points
+//    bezierCurve: true,
 
-    //Boolean - Whether the line is curved between points
-    bezierCurve: true,
+//    //Number - Tension of the bezier curve between points
+//    bezierCurveTension: 0.4,
 
-    //Number - Tension of the bezier curve between points
-    bezierCurveTension: 0.4,
+//    //Boolean - Whether to show a dot for each point
+//    pointDot: true,
 
-    //Boolean - Whether to show a dot for each point
-    pointDot: true,
+//    //Number - Radius of each point dot in pixels
+//    pointDotRadius: 4,
 
-    //Number - Radius of each point dot in pixels
-    pointDotRadius: 4,
+//    //Number - Pixel width of point dot stroke
+//    pointDotStrokeWidth: 1,
 
-    //Number - Pixel width of point dot stroke
-    pointDotStrokeWidth: 1,
+//    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+//    pointHitDetectionRadius: 20,
 
-    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-    pointHitDetectionRadius: 20,
+//    //Boolean - Whether to show a stroke for datasets
+//    datasetStroke: true,
 
-    //Boolean - Whether to show a stroke for datasets
-    datasetStroke: true,
+//    //Number - Pixel width of dataset stroke
+//    datasetStrokeWidth: 2,
 
-    //Number - Pixel width of dataset stroke
-    datasetStrokeWidth: 2,
+//    //Boolean - Whether to fill the dataset with a colour
+//    datasetFill: true,
 
-    //Boolean - Whether to fill the dataset with a colour
-    datasetFill: true,
-
-    //String - A legend template
-   // legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-    legendTemplate: '<ul id="legendUl">'
-                  + '<% for (var i=0; i<datasets.length; i++) { %>'
-                    + '<li>'
-                    + '<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
-                    + '<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
-                  + '</li>'
-                + '<% } %>'
-              + '</ul>'
-};
+//    //String - A legend template
+//   // legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+//    legendTemplate: '<ul id="legendUl">'
+//                  + '<% for (var i=0; i<datasets.length; i++) { %>'
+//                    + '<li>'
+//                    + '<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
+//                    + '<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
+//                  + '</li>'
+//                + '<% } %>'
+//              + '</ul>'
+//};
 
 
 
@@ -91,12 +89,93 @@ var myClientId = "";
 var startDate = "";
 var endDate = "";
 $(function () {
-  
 
-    // Get the context of the canvas element we want to select
+    var chartdata = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            //{
+            //    label: "My First dataset",
+            //    fillColor: "#1a4356",
+            //    strokeColor: "rgba(220,220,220,1)",
+            //    pointColor: "rgba(220,220,220,1)",
+            //    pointStrokeColor: "#fff",
+            //    pointHighlightFill: "#fff",
+            //    pointHighlightStroke: "rgba(220,220,220,1)",
+            //    data: [65, 59, 80, 81, 56, 55, 40]
+            //},
+            //{
+            //    label: "My Second dataset",
+            //    fillColor: "rgba(151,187,205,0.2)",
+            //    strokeColor: "rgba(151,187,205,1)",
+            //    pointColor: "rgba(151,187,205,1)",
+            //    pointStrokeColor: "#fff",
+            //    pointHighlightFill: "#fff",
+            //    pointHighlightStroke: "rgba(151,187,205,1)",
+            //    data: [28, 48, 40, 19, 86, 27, 90]
+            //}
+        ]
+    };
+  
+    var options = {
+        animation: true,
+        ///Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: true,
+
+        //String - Colour of the grid lines
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines: true,
+
+        //Boolean - Whether the line is curved between points
+        bezierCurve: true,
+
+        //Number - Tension of the bezier curve between points
+        bezierCurveTension: 0.4,
+
+        //Boolean - Whether to show a dot for each point
+        pointDot: true,
+
+        //Number - Radius of each point dot in pixels
+        pointDotRadius: 4,
+
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth: 1,
+
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius: 20,
+
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke: true,
+
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth: 2,
+
+        //Boolean - Whether to fill the dataset with a colour
+        datasetFill: true,
+
+        //String - A legend template
+        // legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+        legendTemplate: '<ul id="legendUl">'
+                      + '<% for (var i=0; i<datasets.length; i++) { %>'
+                        + '<li>'
+                        + '<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
+                        + '<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
+                      + '</li>'
+                    + '<% } %>'
+                  + '</ul>'
+    };
+
+    //// Get the context of the canvas element we want to select
     var ctx = document.getElementById("myChart").getContext("2d");
 
-    window.myLineChart = new Chart(ctx).Line(data, options);
+    myLineChart = new Chart(ctx).Line(chartdata, options);
 
   //  var legend = myLineChart.generateLegend();
 
@@ -112,19 +191,19 @@ $(function () {
     // Add client-side hub methods that the server will call
     $.extend(signalrchart.client, {
         updateChart: function (returndata) {
-            var dataSet = [[returndata.Value, 0]]
+         //   var dataSet = [[returndata.Values, returndata.DateTime]]
            
-            console.log(returndata.Value);
-            window.myLineChart.removeData();
-            window.myLineChart.addData([returndata.Value], returndata.DateTime);
+            console.log(returndata.Values);
+            myLineChart.removeData();
+            myLineChart.addData(returndata.Values, returndata.DateTime);
            
-            window.myLineChart.update();
+            myLineChart.update();
 
            
         },
         addToLegend: function (data) {
             console.log(data);
-
+            
             var a =
             {
                 label: data.Label,
@@ -134,12 +213,17 @@ $(function () {
                 pointStrokeColor: data.PointStrokeColor,
                 pointHighlightFill: data.PointHighlightFill,
                 pointHighlightStroke: data.PointHighlightStroke,
-                data: [0,0,0,0]
+                data: [10,10,10,10,10,10,100]
             }
+            chartdata.datasets.push(a);
+            console.log(chartdata)
+            ctx.clearRect(0, 0, myChart.width, myChart.height);
+            myLineChart.destroy();
+            myLineChart = new Chart(ctx).Line(chartdata, options);
             //datasets.push(a);
-            var x = window.myLineChart.datasets;
-            window.myLineChart.datasets.push(a);
-            window.myLineChart.update();
+            //var x = window.myLineChart.datasets;
+           // myLineChart.datasets.push(a);
+           // myLineChart.update();
 
             var legend = myLineChart.generateLegend();
             $('#legendUl').remove();
@@ -194,7 +278,7 @@ $(function () {
 
     $("#getDataBtn").click(function () {
 
-        window.myLineChart.destroy();
+        myLineChart.destroy();
         console.log(startDate + " " + endDate);
         if (startDate != "" && endDate != "") {
             $.ajax({
