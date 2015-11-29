@@ -12,9 +12,9 @@ namespace Trend.Core.Data
 
         public int T_SavedChartId { get; set; }
 
-        public int T_DataValueId { get; set; }
+        public int T_DataPointId { get; set; }
 
-        public virtual T_DataValue T_DataValue { get; set; }
+        public virtual T_DataPoint T_DataPoint { get; set; }
 
         public virtual T_SavedChart T_SavedChart { get; set; }
     }

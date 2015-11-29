@@ -64,14 +64,14 @@ namespace Trend.Core.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<T_DataPoint>()
+                .HasMany(e => e.T_ChartData)
+                .WithRequired(e => e.T_DataPoint)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<T_DataPoint>()
                 .HasMany(e => e.T_DataValue)
                 .WithRequired(e => e.T_DataPoint1)
                 .HasForeignKey(e => e.T_DataPoint)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<T_DataValue>()
-                .HasMany(e => e.T_ChartData)
-                .WithRequired(e => e.T_DataValue)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<T_Plc>()

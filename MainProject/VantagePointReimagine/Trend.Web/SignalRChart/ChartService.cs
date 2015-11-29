@@ -92,19 +92,23 @@ namespace Trend.Web.SignalRChart
         {
             var chartData = new T_ChartData
             {
-                T_DataValueId = pointId,
+                T_DataPointId = pointId,
                 T_SavedChartId = chartId
             };
 
             db.T_ChartData.Add(chartData);
             db.SaveChanges();
         }
+
+        internal void LoadChart(int chartId)
+        {
+            db.T_SavedChart.FirstOrDefault(x => x.Id.Equals(chartId));
+        }
+
         internal T_DataPoint GetDataPoint(int pointId)
         {
             return db.T_DataPoint.FirstOrDefault(x => x.Id.Equals(pointId));
-        }
-
-      
+        }     
         public void Stop()
         {
             _updatingStockPrices = false;

@@ -186,6 +186,11 @@ $(function () {
         signalrchart.server.removeFromChart($.connection.hub.id,e.currentTarget.id);
 
     });
+    $('.glyphicon-list-alt').click(function (e) {
+        var chartId = e.currentTarget.id;
+        signalrchart.server.loadChart(chartId);
+
+    })
 
     $('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
         console.log(date._i);

@@ -22,9 +22,6 @@
                             <li class="active">
                                 <a href="#">
                                     <i class="glyphicon glyphicon-cog">@point.Name</i> 
-
-                                    @*@Html.ActionLink("Add", "Add", new { id = point.Id })
-                                        @Html.ActionLink("Remove", "Remove", new { id = point.Id })*@
                                 </a>
                             </li>
                                 <li>
@@ -48,7 +45,7 @@
                 @foreach (var item in Model.Charts)
                 {
 
-                    <a href="#" data-toggle="collapse" data-target="#userMenu">@item.Name <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#userMenu" id="@item.Id.ToString()">@item.Name <i class="glyphicon glyphicon-list-alt"></i></a>
                 }
             </li>
         </ul>

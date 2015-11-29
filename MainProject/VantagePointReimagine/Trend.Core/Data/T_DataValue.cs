@@ -8,12 +8,6 @@ namespace Trend.Core.Data
 
     public partial class T_DataValue
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_DataValue()
-        {
-            T_ChartData = new HashSet<T_ChartData>();
-        }
-
         public int Id { get; set; }
 
         public int T_DataPoint { get; set; }
@@ -21,9 +15,6 @@ namespace Trend.Core.Data
         public decimal Value { get; set; }
 
         public DateTime DateTime { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_ChartData> T_ChartData { get; set; }
 
         public virtual T_DataPoint T_DataPoint1 { get; set; }
     }

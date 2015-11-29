@@ -98,6 +98,8 @@ namespace Trend.Web.SignalRChart
         }
         public T_SavedChart LoadChart(int chartId)
         {
+            _chartService.LoadChart(chartId);
+
             throw new NotImplementedException();
         }
         public void SaveChart(string clientId,string chartName)
@@ -117,6 +119,7 @@ namespace Trend.Web.SignalRChart
             _dummyPlcService.StartDummyPlc(points);
             return "Ready";
         }
+        
         public string StopChartData(string clientId)
         {
             //_chartService.Stop();

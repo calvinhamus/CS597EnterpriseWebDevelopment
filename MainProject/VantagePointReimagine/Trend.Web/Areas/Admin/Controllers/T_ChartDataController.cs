@@ -7,18 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Trend.Core.Data;
-using Trend.Web.Controllers;
 
 namespace Trend.Web.Areas.Admin.Controllers
 {
-    public class ChartDataController : BaseAdminController
+    public class T_ChartDataController : Controller
     {
         private TrendData db = new TrendData();
 
         // GET: Admin/T_ChartData
         public ActionResult Index()
         {
-            var t_ChartData = db.T_ChartData.Include(t => t.T_DataValue).Include(t => t.T_SavedChart);
+            var t_ChartData = db.T_ChartData.Include(t => t.T_DataPoint).Include(t => t.T_SavedChart);
             return View(t_ChartData.ToList());
         }
 
@@ -40,8 +39,8 @@ namespace Trend.Web.Areas.Admin.Controllers
         // GET: Admin/T_ChartData/Create
         public ActionResult Create()
         {
-            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id");
-            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name");
+            ViewBag.T_DataPointId = new SelectList(db.T_DataPoint, "Id", "Name");
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "T_UserId");
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,T_SavedChartId,T_DataValueId")] T_ChartData t_ChartData)
+        public ActionResult Create([Bind(Include = "Id,T_SavedChartId,T_DataPointId")] T_ChartData t_ChartData)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +58,8 @@ namespace Trend.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
-            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            ViewBag.T_DataPointId = new SelectList(db.T_DataPoint, "Id", "Name", t_ChartData.T_DataPointId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "T_UserId", t_ChartData.T_SavedChartId);
             return View(t_ChartData);
         }
 
@@ -76,8 +75,8 @@ namespace Trend.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
-            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            ViewBag.T_DataPointId = new SelectList(db.T_DataPoint, "Id", "Name", t_ChartData.T_DataPointId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "T_UserId", t_ChartData.T_SavedChartId);
             return View(t_ChartData);
         }
 
@@ -86,7 +85,7 @@ namespace Trend.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,T_SavedChartId,T_DataValueId")] T_ChartData t_ChartData)
+        public ActionResult Edit([Bind(Include = "Id,T_SavedChartId,T_DataPointId")] T_ChartData t_ChartData)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +93,8 @@ namespace Trend.Web.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.T_DataValueId = new SelectList(db.T_DataValue, "Id", "Id", t_ChartData.T_DataValueId);
-            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "Name", t_ChartData.T_SavedChartId);
+            ViewBag.T_DataPointId = new SelectList(db.T_DataPoint, "Id", "Name", t_ChartData.T_DataPointId);
+            ViewBag.T_SavedChartId = new SelectList(db.T_SavedChart, "Id", "T_UserId", t_ChartData.T_SavedChartId);
             return View(t_ChartData);
         }
 

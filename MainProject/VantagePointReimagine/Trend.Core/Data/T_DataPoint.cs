@@ -11,6 +11,7 @@ namespace Trend.Core.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_DataPoint()
         {
+            T_ChartData = new HashSet<T_ChartData>();
             T_DataValue = new HashSet<T_DataValue>();
         }
 
@@ -22,11 +23,12 @@ namespace Trend.Core.Data
 
         public int T_PlcId { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_ChartData> T_ChartData { get; set; }
+
         public virtual T_Plc T_Plc { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_DataValue> T_DataValue { get; set; }
-
-      
     }
 }

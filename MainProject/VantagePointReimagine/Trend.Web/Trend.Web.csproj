@@ -193,12 +193,12 @@
     <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\DummyPlcController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ChartDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\DataPointController.cs" />
     <Compile Include="Areas\Admin\Controllers\DataValueController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlcBrandController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlcController.cs" />
     <Compile Include="Areas\Admin\Controllers\SavedChartController.cs" />
+    <Compile Include="Areas\Admin\Controllers\T_ChartDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserPlcController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseAuthenticatedController.cs" />
@@ -258,11 +258,6 @@
     <Content Include="Areas\Admin\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\ChartData\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ChartData\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\ChartData\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\ChartData\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ChartData\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DataValue\Create.cshtml" />
     <Content Include="Areas\Admin\Views\DataValue\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DataValue\Details.cshtml" />
@@ -446,6 +441,11 @@
     <Content Include="fonts\RobotoDraftMedium.woff2" />
     <Content Include="fonts\RobotoDraftRegular.woff" />
     <Content Include="fonts\RobotoDraftRegular.woff2" />
+    <Content Include="Areas\Admin\Views\T_ChartData\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\T_ChartData\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\T_ChartData\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\T_ChartData\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\T_ChartData\Index.cshtml" />
     <None Include="Properties\PublishProfiles\DataTrend.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
