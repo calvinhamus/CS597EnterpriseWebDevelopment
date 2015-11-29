@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Admin page</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/material")
     @Scripts.Render("~/bundles/modernizr")
  
 
@@ -21,11 +22,7 @@
                 @Html.ActionLink("Admin Home", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+              
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -39,7 +36,13 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/chart")
+    @Scripts.Render("~/bundles/material")
     @RenderSection("scripts", required: false)
 </body>
 </html>

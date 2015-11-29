@@ -207,10 +207,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510190008246_identity.cs" />
-    <Compile Include="Migrations\201510190008246_identity.Designer.cs">
-      <DependentUpon>201510190008246_identity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GetDataModel.cs" />
@@ -541,11 +537,6 @@
       <Project>{1a4194f8-d397-4867-8b2f-3a92026f5d0b}</Project>
       <Name>Trend.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510190008246_identity.resx">
-      <DependentUpon>201510190008246_identity.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

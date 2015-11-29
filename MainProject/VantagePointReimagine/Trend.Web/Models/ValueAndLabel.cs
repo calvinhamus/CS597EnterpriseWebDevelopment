@@ -7,7 +7,7 @@ namespace Trend.Web.Models
 {
     public class ValueAndLabel
     {
-        public decimal Value { get; set; }
-        public string Label { get; set; }
+        public List<List<decimal>> Values { get; set; }
+        public List<string> Labels { get; set; }
     }
 }

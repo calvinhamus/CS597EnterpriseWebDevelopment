@@ -36,20 +36,37 @@ namespace Trend.Web.Controllers
         [HttpPost]
         public ActionResult GetChartData(GetDataModel data)
         {
-            
-            var y = (from t in db.T_DataValue
-                     where t.DateTime <= data.EndDate
-                     && t.DateTime >= data.StartDate
-                     select new ValueAndLabel
-                     {
-                         Value = t.Value,
-                         Label = t.DateTime.ToString()
+            var valueAndLabel = new ValueAndLabel();
+            valueAndLabel.Labels = new List<string>();
+            var temp = new List<List<T_DataValue>>();
+            foreach (var point in data.DataPointIds )
+            {
+                var values = (from t in db.T_DataValue
+                              where t.DateTime <= data.EndDate
+                              && t.DateTime >= data.StartDate
+                              && t.T_DataPoint == point
+                              select t).ToList();
+                temp.Add(values);
+            }
 
-                     });
-            var points = db.T_DataValue.Where(x => x.DateTime <= data.EndDate && x.DateTime >= data.StartDate).Where(y=> data.DataPointIds.Contains(y.T_DataPoint)).OrderBy(y =>y.T_DataPoint).ToList();
-           
-            return Json(points.ToList());
+            var list = new List<List<decimal>>();
+            for (var x = 0; x < temp.Count; x++)
+            {
+                
+                for (var y = 0; y < temp[x].Count; y++)
+                {
+                    list.Add(new List<decimal>());
+                    list[y].Add(temp[x][y].Value);
+                    valueAndLabel.Labels.Add(temp[x][y].DateTime.ToString());
+                }
+            }
+            list.RemoveAll(x => x.Count == 0);
+            valueAndLabel.Labels.RemoveRange(list.Count, valueAndLabel.Labels.Count - list.Count);
+          
+            valueAndLabel.Values = list;
+            return Json(valueAndLabel);
+
+
         }
-
     }
 }

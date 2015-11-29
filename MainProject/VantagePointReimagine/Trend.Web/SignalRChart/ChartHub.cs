@@ -100,11 +100,12 @@ namespace Trend.Web.SignalRChart
         {
             throw new NotImplementedException();
         }
-        public bool SaveChart(string clientId)
+        public void SaveChart(string clientId,string chartName)
         {
             var hubClient = Clients.Caller.HubClient;
-            _chartService.SaveChart(hubClient["UserName"]);
-            throw new NotImplementedException();
+            var points = hubClient["DataPointIds"];
+            _chartService.SaveChart(hubClient["UserName"],chartName,points);
+           // throw new NotImplementedException();
         }
         public string StartChartData(string clientId)
         {
@@ -126,8 +127,6 @@ namespace Trend.Web.SignalRChart
         {
 
             var holder = new List<int>();
-           // holder.Add(2);
-          //  holder.Add(3);
             var hubClient = new HubClient
             {
                 UserId = clientId,

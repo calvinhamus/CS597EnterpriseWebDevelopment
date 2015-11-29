@@ -54,7 +54,7 @@
         </ul>
     </div>
     <div class="col-sm-10 ">
-        <div class="container">
+        <div class="container" style="padding-top:20px">
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
@@ -81,7 +81,11 @@
             </div>
             <div class="togglebutton">
                 <label>
-                    <input type="checkbox" id="liveMode"> Live Mode
+                    <a>
+                        Live Mode   
+                    </a>
+                    
+                    <input type="checkbox" id="liveMode"> 
                 </label>
             </div>
             <div class='col-md-2 navbar-btn'>
@@ -89,41 +93,46 @@
                     <div type="button" class="btn btn-success" id="getDataBtn">Get Data</div>
                 </div>
             </div>
-            <h1 class="page-header">Dashboard</h1>
+            @*<h1 class="page-header">Dashboard</h1>*@
 
             <div class="row placeholders">
 
              
-                <canvas id="myChart" width="800" height="400"></canvas>
+                <canvas id="myChart"  height="400"></canvas>
                 <div id="legendDiv"></div>
             </div>
 
-            <h2 class="sub-header">Section title</h2>
-            <div class="table-responsive">
-                <table class="table table-striped" id="chartTable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>Lorem</td>
-                            <td>ipsum</td>
-                            <td>dolor</td>
-                            <td>sit</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+           
+        </div>
+        <a href="javascript:void(0)" class="btn btn-primary btn-fab"><i class="material-icons" data-toggle="modal" data-target="#myModal">get_app</i></a>
+    </div>
+    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Save Chart</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label" >Chart Name:</label>
+                        <input type="text" class="form-control" id="saveChartName">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveChartBtn">Save changes</button>
             </div>
         </div>
     </div>
-
 </div>
 

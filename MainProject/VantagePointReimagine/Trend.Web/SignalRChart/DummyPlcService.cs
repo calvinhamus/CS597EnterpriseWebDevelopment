@@ -73,18 +73,7 @@ namespace Trend.Web.SignalRChart
         {
             var temp = new List<int>();
             dataPointIds.ForEach(point => temp.Add((Convert.ToInt32(point))));
-            //var points = db.T_DataValue.Where(x => x.DateTime <= data.EndDate && x.DateTime >= data.StartDate).Where(y => data.DataPointIds.Contains(y.T_DataPoint));
-            var points =  db.T_DataPoint.Where(x => temp.Contains(x.Id)).ToList();
-            //points.ForEach(point => _returnDataPoints.Add(new ReturnChartData
-            //{
-            //    DataPointId = point.Id,
-            //    DateTime = DateTime.Now.ToString(),
-            //    Value = 0,
-            //    DataPoint = point.Name,
-            //    PlcName = point.T_Plc.Name,
-            //}));
-
-           
+            var points =  db.T_DataPoint.Where(x => temp.Contains(x.Id)).ToList();           
             return points;
 
         }
@@ -103,18 +92,6 @@ namespace Trend.Web.SignalRChart
                 {
                     _updatingDataPoint = true;
                     TryUpdateDataChart(_dataPoints);
-                    //for (int i = 0; i < _dataPoints.Count; i++)
-                    //{
-                    //    TryUpdateDataChart(_dataPoints[i]);
-                    //   // _returnDataPoints[i].Value = TryUpdateDataChart(_dataPoints[i]);
-                    //}
-                    //foreach (var datapoint in _dataPoints)
-                    //{
-                    //    TryUpdateDataChart(datapoint);
-
-                    //}
-
-                    // Clients.All.updateChart(_returnDataPoints);
                     _updatingDataPoint = false;
                 }
             }
@@ -156,23 +133,11 @@ namespace Trend.Web.SignalRChart
             pointValue.T_DataPoint = point.Id;
             db.T_DataValue.Add(pointValue);
             await db.SaveChangesAsync();
-
-            //var value = new ReturnChartData
-            //{
-            //    DateTime = pointValue.DateTime.ToString(),
-            //    Value = pointValue.Value,
-            //    DataPoint = point.Name,
-            //    PlcName = point.T_Plc.Name,
-
-            //};
             return pointValue.Value;
-            // Clients.All.updateChart(value);
-            //return true;
         }
         private void StartTimer()
         {
             t = new Timer(Callback, "Some state", -1, -1);
-            // plcId = PlcId;
             t.Change(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
         }
         private IHubConnectionContext<dynamic> Clients

@@ -30,11 +30,11 @@ namespace Trend.Web
                        "~/Scripts/bootstrap-material-datetimepicker.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/respond.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
-                      "~/Scripts/SignalR.StockTicker.js",
+                    //  "~/Scripts/SignalR.StockTicker.js",
                        "~/Scripts/jquery.signalR-2.2.0.js",
                        "~/SignalRChart/SignalR.Chart.js"));
 
@@ -53,21 +53,32 @@ namespace Trend.Web
 
             //Change
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css",
-                      "~/Content/StockTicker.css",
-                      "~/Content/dashboard.css",
-                      "~/Content/bootstrap-material-datetimepicker.css"));
+                      "~/Content/bootstrap-material-datetimepicker.css",
+                      "~/Content/material/roboto.min.css",
+                     "~/Content/material/material.min.css",
+                     "~/Content/material/ripples.min.css"));
+
+
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.min.css",
+            //          "~/Content/site.css",
+            //         // "~/Content/StockTicker.css",
+            //         // "~/Content/dashboard.css",
+            //          "~/Content/bootstrap-material-datetimepicker.css"));
 
             //bundles.Add(new StyleBundle("~/Content/material").Include(
             //        "~/Content/material/roboto.min.css",
             //        "~/Content/material/material.min.css",
             //        "~/Content/material/ripples.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/material").Include(
-                   "~/Content/material/roboto.css",
-                   "~/Content/material/material.css",
-                   "~/Content/material/ripples.css"));
+            //bundles.Add(new StyleBundle("~/Content/material").Include(
+            //       "~/Content/material/roboto.css",
+            //       "~/Content/material/material.css",
+            //       "~/Content/material/ripples.css"));
+
+            //  BundleTable.EnableOptimizations = true;
 
         }
     }

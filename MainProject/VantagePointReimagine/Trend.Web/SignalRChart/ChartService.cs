@@ -36,8 +36,6 @@ namespace Trend.Web.SignalRChart
         private ChartService(IHubConnectionContext<dynamic> clients)
         {
             Clients = clients;
-           // _timer = new Timer(UpdateStockPrices, null, _updateInterval, _updateInterval);
-            // LoadDefaultStocks();
         }
 
         public static ChartService Instance
@@ -71,7 +69,7 @@ namespace Trend.Web.SignalRChart
             };
         }
 
-        internal void SaveChart(string username)
+        internal void SaveChart(string username,string chartname, dynamic points)
         {
             //var user = User.Identity.GetUserId();
             var user = db.AspNetUsers.FirstOrDefault(x => x.UserName == username);
@@ -79,14 +77,32 @@ namespace Trend.Web.SignalRChart
             {
                 T_UserId = user.Id,
                 Created = DateTime.Now,
-                Name = ""
-
-
+                Updated = DateTime.Now,
+                Name = chartname
+            };
+            db.T_SavedChart.Add(chart);
+            db.SaveChanges();
+            foreach ( var point in points)
+            {
+                GenerateChartData(Convert.ToInt16(point), chart.Id);
+            }
+           // throw new NotImplementedException();
+        }
+        internal void  GenerateChartData(int pointId,int chartId)
+        {
+            var chartData = new T_ChartData
+            {
+                T_DataValueId = pointId,
+                T_SavedChartId = chartId
             };
 
-            throw new NotImplementedException();
+            db.T_ChartData.Add(chartData);
+            db.SaveChanges();
         }
-
+        internal T_DataPoint GetDataPoint(int pointId)
+        {
+            return db.T_DataPoint.FirstOrDefault(x => x.Id.Equals(pointId));
+        }
 
       
         public void Stop()
