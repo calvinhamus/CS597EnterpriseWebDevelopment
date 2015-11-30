@@ -5,8 +5,18 @@ $(function () {
     var dataPoints = [];
     var dataLegend = [];
     var chartdata = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["null", "null", "null", "null", "null", "null", "null"],
         datasets: [
+             {
+                 label: "My First dataset",
+                 fillColor: "rgba(220,220,220,0.2)",
+                 strokeColor: "rgba(220,220,220,1)",
+                 pointColor: "rgba(220,220,220,1)",
+                 pointStrokeColor: "#fff",
+                 pointHighlightFill: "#fff",
+                 pointHighlightStroke: "rgba(220,220,220,1)",
+                 data: [0, 0, 0, 0, 0, 0,0]
+             }
         ]
     };
   
@@ -91,7 +101,7 @@ $(function () {
         updateChart: function (returndata) {
          //   var dataSet = [[returndata.Values, returndata.DateTime]]
            
-            console.log(returndata.Values);
+          //  console.log(returndata.Values);
             myLineChart.removeData();
             myLineChart.addData(returndata.Values, returndata.DateTime);
            
@@ -100,7 +110,15 @@ $(function () {
            
         },
         addToLegend: function (data) {
-            console.log(data);
+
+            for (var i = 0; i < chartdata.datasets.length; i++) {
+                var obj = chartdata.datasets[i];
+
+                if (obj.label == "My First dataset") {
+                    chartdata.datasets.splice(i, 1);
+                }
+            };
+          //  console.log(data);
             dataLegend.push(data.Label);
             dataPoints.push(data.DataPointId);
             var a =
@@ -115,7 +133,7 @@ $(function () {
                 data: [0,0,0,0,0,0,0]
             }
             chartdata.datasets.push(a);
-            console.log(chartdata)
+           // console.log(chartdata)
             ctx.clearRect(0, 0, myChart.width, myChart.height);
             myLineChart.destroy();
             myLineChart = new Chart(ctx).Line(chartdata, options);
@@ -139,14 +157,10 @@ $(function () {
                 }
             };
            
-            console.log(chartdata)
+          //  console.log(chartdata)
             ctx.clearRect(0, 0, myChart.width, myChart.height);
             myLineChart.destroy();
             myLineChart = new Chart(ctx).Line(chartdata, options);
-            //datasets.push(a);
-            //var x = window.myLineChart.datasets;
-            // myLineChart.datasets.push(a);
-            // myLineChart.update();
 
             var legend = myLineChart.generateLegend();
             $('#legendUl').remove();
@@ -178,7 +192,7 @@ $(function () {
            
         });
     $("#liveMode").change(function () {
-        console.log(this.checked);
+      //  console.log(this.checked);
         if (this.checked) {
             signalrchart.server.startChartData(myClientId);
         } else {
@@ -191,20 +205,16 @@ $(function () {
         signalrchart.server.addToChart($.connection.hub.id, e.currentTarget.id);
     });
     $('.mdi-content-remove').click(function (e) {
-        console.log(e.currentTarget.id);
+      //  console.log(e.currentTarget.id);
         var a = dataPoints.indexOf(e.currentTarget.id);
         dataPoints.splice(a, 1);
         signalrchart.server.removeFromChart($.connection.hub.id,e.currentTarget.id);
 
     });
-    //$('.glyphicon-list-alt').click(function (e) {
-    //    var chartId = e.currentTarget.id;
-    //    signalrchart.server.loadChart(chartId);
 
-    //})
 
     $('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
-        console.log(date._i);
+      //  console.log(date._i);
         endDate = date._i;
     });
     $('#date-start').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function(e, date) {
@@ -221,7 +231,7 @@ $(function () {
         var startDate = $('#date-start').val();
         var endDate = $('#date-end').val();
         myLineChart.destroy();
-        console.log(startDate + " " + endDate);
+     //   console.log(startDate + " " + endDate);
         if (startDate != "" && endDate != "") {
             $.ajax({
                 type: 'post',
