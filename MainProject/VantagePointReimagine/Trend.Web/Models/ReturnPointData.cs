@@ -10,7 +10,7 @@ namespace Trend.Web.Models
         //public string DataPointName { get; set; }
         //public string PlcName { get; set; }
         //public string HexColor { get; set; }
-
+        public int DataPointId { get; set; }
         public string Label { get; set; }
         public string FillColor { get; set; }
         public string StrokeColor { get; set; }

@@ -77,8 +77,8 @@ namespace Trend.Web
             //       "~/Content/material/roboto.css",
             //       "~/Content/material/material.css",
             //       "~/Content/material/ripples.css"));
-
-            //  BundleTable.EnableOptimizations = true;
+            
+              //BundleTable.EnableOptimizations = false;
 
         }
     }

@@ -29,7 +29,6 @@
 
                                     <div type="button" class="btn btn-danger btn-xs mdi-content-remove" id="@point.Id.ToString()"> </div>
                                 </li>
-
                         }
 
                     </ul>
@@ -40,12 +39,18 @@
         <hr>
         <a href="#"><strong><i class="glyphicon glyphicon-signal"></i> Saved Charts</strong></a>
         <ul class="nav nav-stacked">
-            <li class="nav-header">
+            <li class="nav-header" id="chartsList">
 
                 @foreach (var item in Model.Charts)
                 {
-
-                    <a href="#" data-toggle="collapse" data-target="#userMenu" id="@item.Id.ToString()">@item.Name <i class="glyphicon glyphicon-list-alt"></i></a>
+                    var pointsList = item.T_ChartData.Select(z => z.T_DataPoint.Name).ToList();
+                    var holder = "";
+                    var savedChartId = "chart-" + item.Id;
+                    foreach(var p in pointsList)
+                    {
+                        holder = holder + " " + p.ToString();
+                    }
+                    <a href="#" id="@savedChartId" data-toggle="modal" data-target="#exampleModal" data-whatever="@item.Name" data-points="@holder" data-chartid="@item.Id">@item.Name <i class="glyphicon glyphicon-list-alt"></i></a>
                 }
             </li>
         </ul>
@@ -119,15 +124,42 @@
                         <label for="recipient-name" class="control-label" >Chart Name:</label>
                         <input type="text" class="form-control" id="saveChartName">
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
+          
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="saveChartBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Other Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="point-name" class="control-label">Points:</label>
+                        <label type="text" class="form-control" id="point-name"></label>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Chart Id:</label>
+                        <label class="form-control" id="chartId-text"></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-raised btn-danger" id="deleteChartBtn">Delete Chart</button>
+               
+                <button type="button" class="btn btn-primary" id="loadChartBtn">Load Chart</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -152,7 +152,5 @@ E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\bin\Microsoft.
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\bin\Microsoft.Owin.Security.Twitter.xml
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Trend.Web.csprojResolveAssemblyReference.cache
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Trend.Web.csproj.GenerateResource.Cache
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Trend.Web.dll
 E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Trend.Web.pdb
-E:\Github\CS597WebDev\MainProject\VantagePointReimagine\Trend.Web\obj\Release\Trend.Web.Migrations.identity.resources

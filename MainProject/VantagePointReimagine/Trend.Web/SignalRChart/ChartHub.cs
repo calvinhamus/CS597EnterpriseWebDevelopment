@@ -96,17 +96,47 @@ namespace Trend.Web.SignalRChart
 
             Clients.Caller.removeFromLegend(point);
         }
-        public T_SavedChart LoadChart(int chartId)
+        public void LoadChart(int chartId)
         {
-            _chartService.LoadChart(chartId);
+            ClearDataChart();
+           var chartData = _chartService.LoadChart(chartId);
 
-            throw new NotImplementedException();
+            foreach(var point in chartData)
+            {
+                AddToChart("", point.DataPointId);
+               // Clients.Caller.addToLegend(point);
+            }
+            
+            //  throw new NotImplementedException();
         }
+        public void DeleteChart(int chartId)
+        {
+            _chartService.DeleteChart(chartId);
+        }
+        private void ClearDataChart()
+        {
+            var hubClient = Clients.Caller.HubClient;
+
+            var points = hubClient["DataPointIds"];
+            var newPoints = new List<long>();
+            foreach (var z in points)
+            {
+                var point = _chartService.GetPoint(Convert.ToInt16(z));
+
+                Clients.Caller.removeFromLegend(point);
+
+            }
+
+            hubClient["DataPointIds"] = newPoints;
+            Clients.Caller.HubClient = hubClient; 
+        }
+
         public void SaveChart(string clientId,string chartName)
         {
             var hubClient = Clients.Caller.HubClient;
             var points = hubClient["DataPointIds"];
-            _chartService.SaveChart(hubClient["UserName"],chartName,points);
+            var chartId = _chartService.SaveChart(hubClient["UserName"],chartName,points);
+            Clients.Caller.chartSaved(chartId);
            // throw new NotImplementedException();
         }
         public string StartChartData(string clientId)

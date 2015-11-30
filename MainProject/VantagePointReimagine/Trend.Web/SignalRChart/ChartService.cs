@@ -25,13 +25,11 @@ namespace Trend.Web.SignalRChart
         private readonly ConcurrentDictionary<int, T_DataValue> _stocks = new ConcurrentDictionary<int, T_DataValue>();
 
         // Stock can go up or down by a percentage of this factor on each change
-        private readonly double _rangePercent = 0.002;
 
         private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(500);
         private readonly Random _updateOrNotRandom = new Random();
 
-        private Timer _timer;
-        private volatile bool _updatingStockPrices;
+      
 
         private ChartService(IHubConnectionContext<dynamic> clients)
         {
@@ -56,20 +54,22 @@ namespace Trend.Web.SignalRChart
         internal ReturnPointData GetPoint(int dataPointId)
         {
             var point = db.T_DataPoint.Where(x => x.Id.Equals(dataPointId)).FirstOrDefault();
-            var pointAndStrokeColor = RandomColorGenerator.GetRandomColor();
+           // var pointAndStrokeColor = RandomColorGenerator.GetRandomColor();
+            var pointAndStrokeColorRGBA = RandomColorGenerator.GetRandomColorRGBA();
             return new ReturnPointData
             {
-                StrokeColor = pointAndStrokeColor,
-                PointColor = pointAndStrokeColor,
+                DataPointId = point.Id,
+                StrokeColor = pointAndStrokeColorRGBA,
+                PointColor = pointAndStrokeColorRGBA,
                 Label = point.Name,
                 PointHighlightFill = "#fff",
                 PointHighlightStroke = "rgba(151,187,205,1)",
                 PointStrokeColor = "#fff",
-                FillColor = RandomColorGenerator.GetRandomColor()
+                FillColor = RandomColorGenerator.GetRandomColorRGBA()
             };
         }
 
-        internal void SaveChart(string username,string chartname, dynamic points)
+        internal int SaveChart(string username,string chartname, dynamic points)
         {
             //var user = User.Identity.GetUserId();
             var user = db.AspNetUsers.FirstOrDefault(x => x.UserName == username);
@@ -86,6 +86,7 @@ namespace Trend.Web.SignalRChart
             {
                 GenerateChartData(Convert.ToInt16(point), chart.Id);
             }
+            return chart.Id;
            // throw new NotImplementedException();
         }
         internal void  GenerateChartData(int pointId,int chartId)
@@ -100,20 +101,30 @@ namespace Trend.Web.SignalRChart
             db.SaveChanges();
         }
 
-        internal void LoadChart(int chartId)
+        internal List<ReturnPointData> LoadChart(int chartId)
         {
-            db.T_SavedChart.FirstOrDefault(x => x.Id.Equals(chartId));
+           var chart =  db.T_SavedChart.FirstOrDefault(x => x.Id.Equals(chartId));
+           var returnPointList = new List<ReturnPointData>();
+            foreach (var point in chart.T_ChartData)
+            {
+                var temp = GetPoint(point.T_DataPointId);
+                returnPointList.Add(temp);
+            }
+            return returnPointList;
+        }
+
+        internal void DeleteChart(int chartId)
+        {
+            var chart = db.T_SavedChart.FirstOrDefault(x => x.Id.Equals(chartId));
+            db.T_SavedChart.Remove(chart);
+            db.SaveChanges();
         }
 
         internal T_DataPoint GetDataPoint(int pointId)
         {
             return db.T_DataPoint.FirstOrDefault(x => x.Id.Equals(pointId));
         }     
-        public void Stop()
-        {
-            _updatingStockPrices = false;
-            _timer?.Dispose();
-        }
+      
      
     }
 }

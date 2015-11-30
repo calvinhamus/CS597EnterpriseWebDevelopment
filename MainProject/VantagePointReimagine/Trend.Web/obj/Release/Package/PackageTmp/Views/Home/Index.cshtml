@@ -1,31 +1,167 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Trend.Web.Models.MainVM
+@{
+    ViewBag.Title = "Trend";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="row">
+    <div class="col-sm-2">
+        <!-- Left column -->
+        <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> PLC's</strong></a>
+        <hr>
+        <ul class="nav nav-stacked">
+            <li class="nav-header">
+                @{ var i = 2; }
+                @foreach (var item in Model.Plcs)
+                {
+                    var target = "menu" + i.ToString();
+
+                    <a href="#" data-toggle="collapse" data-target="#@target">@item.Name <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <ul class="nav nav-stacked collapse in" id="@target">
+                        @foreach (var point in item.T_DataPoint)
+                        {
+                            <li class="active">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-cog">@point.Name</i> 
+                                </a>
+                            </li>
+                                <li>
+                                    <div type="button" class="btn btn-success btn-xs mdi-content-add" id="@point.Id.ToString()"></div>
+
+                                    <div type="button" class="btn btn-danger btn-xs mdi-content-remove" id="@point.Id.ToString()"> </div>
+                                </li>
+                        }
+
+                    </ul>
+                    i++;
+                }
+            </li>
+        </ul>
+        <hr>
+        <a href="#"><strong><i class="glyphicon glyphicon-signal"></i> Saved Charts</strong></a>
+        <ul class="nav nav-stacked">
+            <li class="nav-header" id="chartsList">
+
+                @foreach (var item in Model.Charts)
+                {
+                    var pointsList = item.T_ChartData.Select(z => z.T_DataPoint.Name).ToList();
+                    var holder = "";
+                    var savedChartId = "chart-" + item.Id;
+                    foreach(var p in pointsList)
+                    {
+                        holder = holder + " " + p.ToString();
+                    }
+                    <a href="#" id="@savedChartId" data-toggle="modal" data-target="#exampleModal" data-whatever="@item.Name" data-points="@holder" data-chartid="@item.Id">@item.Name <i class="glyphicon glyphicon-list-alt"></i></a>
+                }
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-10 ">
+        <div class="container" style="padding-top:20px">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-control-wrapper">
+                                <div class="form-control-wrapper">
+                                    <input type="text" id="date-start" class="form-control" data-dtp="dtp_XaHNb">
+                                    <div class="floating-label">Start Date</div><span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-control-wrapper">
+                                <div class="form-control-wrapper">
+                                    <input type="text" id="date-end" class="form-control" data-dtp="dtp_YpNtn">
+                                    <div class="floating-label">End Date</div><span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="togglebutton">
+                <label>
+                    <a>
+                        Live Mode   
+                    </a>
+                    
+                    <input type="checkbox" id="liveMode"> 
+                </label>
+            </div>
+            <div class='col-md-2 navbar-btn'>
+                <div class="form-group">
+                    <div type="button" class="btn btn-success" id="getDataBtn">Get Data</div>
+                </div>
+            </div>
+            @*<h1 class="page-header">Dashboard</h1>*@
+
+            <div class="row placeholders">
+
+             
+                <canvas id="myChart"  height="400"></canvas>
+                <div id="legendDiv"></div>
+            </div>
+
+           
+        </div>
+        <a href="javascript:void(0)" class="btn btn-primary btn-fab"><i class="material-icons" data-toggle="modal" data-target="#myModal">get_app</i></a>
+    </div>
+    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Save Chart</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label" >Chart Name:</label>
+                        <input type="text" class="form-control" id="saveChartName">
+                    </div>
+          
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveChartBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Other Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="point-name" class="control-label">Points:</label>
+                        <label type="text" class="form-control" id="point-name"></label>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Chart Id:</label>
+                        <label class="form-control" id="chartId-text"></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-raised btn-danger" id="deleteChartBtn">Delete Chart</button>
+               
+                <button type="button" class="btn btn-primary" id="loadChartBtn">Load Chart</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

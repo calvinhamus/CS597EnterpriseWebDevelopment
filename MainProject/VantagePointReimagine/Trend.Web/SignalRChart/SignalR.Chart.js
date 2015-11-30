@@ -3,6 +3,7 @@ var startDate = "";
 var endDate = "";
 $(function () {
     var dataPoints = [];
+    var dataLegend = [];
     var chartdata = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -100,7 +101,8 @@ $(function () {
         },
         addToLegend: function (data) {
             console.log(data);
-            
+            dataLegend.push(data.Label);
+            dataPoints.push(data.DataPointId);
             var a =
             {
                 label: data.Label,
@@ -150,6 +152,15 @@ $(function () {
             $('#legendUl').remove();
             //and append it to your page somewhere
             $('#legendDiv').append(legend);
+        },
+        chartSaved: function (data) {
+            var chartName = $('#saveChartName').val();
+            var holder = "";
+            $.each(dataLegend, function (index, value) {
+                holder = holder + " " + value;
+            });
+           
+            $('#chartsList').append(' <a href="#" id="chart-' + data + '" data-toggle="modal" data-target="#exampleModal" data-whatever="' + chartName + '" data-points="'+holder+'" data-chartid="' + data + '">' + chartName + ' <i class="glyphicon glyphicon-list-alt"></i></a>')
         }
 
     });
@@ -176,7 +187,7 @@ $(function () {
     });
 
     $('.mdi-content-add').click(function (e) {
-        dataPoints.push(e.currentTarget.id);
+       
         signalrchart.server.addToChart($.connection.hub.id, e.currentTarget.id);
     });
     $('.mdi-content-remove').click(function (e) {
@@ -186,11 +197,11 @@ $(function () {
         signalrchart.server.removeFromChart($.connection.hub.id,e.currentTarget.id);
 
     });
-    $('.glyphicon-list-alt').click(function (e) {
-        var chartId = e.currentTarget.id;
-        signalrchart.server.loadChart(chartId);
+    //$('.glyphicon-list-alt').click(function (e) {
+    //    var chartId = e.currentTarget.id;
+    //    signalrchart.server.loadChart(chartId);
 
-    })
+    //})
 
     $('#date-end').bootstrapMaterialDatePicker({ format: 'MM/DD/YYYY HH:mm', weekStart: 0 }).on('change', function (e, date) {
         console.log(date._i);
@@ -202,7 +213,8 @@ $(function () {
     });
     $('#saveChartBtn').click(function (e) {
         var chartName = $('#saveChartName').val();
-        signalrchart.server.saveChart(myClientId,chartName);
+        signalrchart.server.saveChart(myClientId, chartName);
+       
     });
     $("#getDataBtn").click(function () {
 
@@ -233,4 +245,25 @@ $(function () {
             });
         }
     });
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var chartName = button.data('whatever') // Extract info from data-* attributes
+        var points = button.data('points')
+        var chartId = button.data('chartid')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text(chartName)
+        modal.find('#chartId-text').text(chartId)
+        modal.find('#point-name').text(points)
+    })
+    $('#loadChartBtn').click(function (e) {
+        var id = $('#chartId-text').text();
+        signalrchart.server.loadChart(id);
+    })
+    $('#deleteChartBtn').click(function (e) {
+        var id = $('#chartId-text').text();
+        $('#chart-' + id).remove();
+        signalrchart.server.deleteChart(id);
+    })
 });

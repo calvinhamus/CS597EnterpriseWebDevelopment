@@ -108,7 +108,7 @@ namespace Trend.Core.Data
             modelBuilder.Entity<T_SavedChart>()
                 .HasMany(e => e.T_ChartData)
                 .WithRequired(e => e.T_SavedChart)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }
