@@ -15,7 +15,7 @@ namespace Trend.Web.SignalRChart
 {
     public interface IDummyPlcService
     {
-        void StartDummyPlc(List<object> PlcIds);
+        void StartDummyPlc(List<object> PlcIds, string clientId);
         void StopDummyPlc(int PlcId);
 
     }
@@ -32,6 +32,7 @@ namespace Trend.Web.SignalRChart
         private List<ReturnChartData> _returnDataPoints = new List<ReturnChartData>();
         private TrendData db = new TrendData();
         private Timer t;
+        private string _clientId;
 
         public DummyPlcService()
         {
@@ -41,7 +42,7 @@ namespace Trend.Web.SignalRChart
 
         public DummyPlcService(IHubConnectionContext<dynamic> clients)
         {
-            Clients = clients;
+            Clients = clients;           
             
         }
         public static DummyPlcService Instance
@@ -59,8 +60,9 @@ namespace Trend.Web.SignalRChart
 
             StartTimer();
         }
-        public void StartDummyPlc(List<object> dataPointIds)
+        public void StartDummyPlc(List<object> dataPointIds, string clientId)
         {
+            _clientId = clientId;
             _dataPoints.Clear();
             _returnDataPoints.Clear();
             _dataPoints = FindDataPoint(dataPointIds);
@@ -115,7 +117,7 @@ namespace Trend.Web.SignalRChart
                 values.Values.Add(pointValue.Value);
                 values.DateTime = pointValue.DateTime.ToString();
             }
-            Clients.All.updateChart(values);
+            Clients.Client(_clientId).updateChart(values);
             await db.SaveChangesAsync();
             
            

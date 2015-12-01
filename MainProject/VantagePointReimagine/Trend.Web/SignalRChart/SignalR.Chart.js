@@ -240,7 +240,7 @@ $(function () {
                 url: '/Trend/Home/GetChartData',
                 data: { StartDate: startDate, EndDate: endDate, DataPointIds: dataPoints },
                 success: function (response, textStatus, jqXHR) {
-                    alert(response);
+                   // alert(response);
                     for (i = 0; i < response.Values.length; i++)
                     {
                       //  console.log("Values: "+response.Values[i] + " Labels: "+ response.Labels[i])

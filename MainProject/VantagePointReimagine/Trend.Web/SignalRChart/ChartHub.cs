@@ -146,7 +146,7 @@ namespace Trend.Web.SignalRChart
            
             //_chartService.Ready();
             var points = hubClient["DataPointIds"];
-            _dummyPlcService.StartDummyPlc(points);
+            _dummyPlcService.StartDummyPlc(points,clientId);
             return "Ready";
         }
         
